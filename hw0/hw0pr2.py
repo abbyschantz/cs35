@@ -91,7 +91,7 @@ def clean_digits(s):
 
 
 def count_909():
-    """ returns the number of phone numbers that are in 909
+    """ returns the number of phone numbers that are in the 909 area code
     """
 
     L = os.listdir("phone_files") 
@@ -113,7 +113,7 @@ def count_909():
     return count
 
 def count_garcia():
-    """ returns the number of phone numbers that contain garcia
+    """ returns the number of phone files that contain Garcia
     """
 
     L = os.listdir("phone_files") 
@@ -160,7 +160,7 @@ def contains42(filename):
 
 
 def count_42():
-    """ returns the number of phone numbers that contain 42
+    """ returns the number of phone numbers that contain the substring 42
     """
 
     L = os.listdir("phone_files") 
@@ -218,14 +218,54 @@ def areacode(filename):
     text = clean_digits(text)
     return text[0:3]
 
+def isSameNum(filename):
+    """ checks if the first number in the phone number is the same as 
+    the last number. Returns True or False
+    """
+
+    file = open(filename,"r")
+    text = file.read()
+    
+    text = clean_digits(text)
+    if text[0] == text[-1]:
+        print (text)
+        return True
+
+    else:
+         return False
+
+def count_SameNum():
+    """ returns the number of phone numbers that begin and end with the same number
+    """
+
+    L = os.listdir("phone_files") 
+    os.chdir( "phone_files" )
+    
+    count = 0
+
+    for foldername in L[1:]:
+        files = os.listdir(foldername)  
+        os.chdir(foldername)
+
+        for filename in files:
+            if isSameNum(filename):
+                count += 1
+
+        os.chdir("..")
+
+    os.chdir("..") 
+    return count
 
 
 def main():
+    print("There are ", count_garcia_by_areacode(), " 'GARCIA' in each area code")
     print("There are ", count_files(), " .txt files in the whole set.")
     print("There are ", count_ten(), " phone numbers that are exactly 10 digits.")
     print("There are ", count_909(), " phone numbers that are in 909.")
     print("There are ", count_garcia(), " people with the name 'GARCIA' in the whole set.")
     print("There are ", count_42(), "phone numbers that contain the string '42'.")
+    print("There are ", count_SameNum(), " phone numbers that begin and end with the same digit.")
+
 
 """
 ANSWERS:
