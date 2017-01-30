@@ -131,9 +131,13 @@ def fours():
 def countquestions(filename):
 	""" counts the number of questions in a specific address
 	"""
+	original_dir = os.getcwd()
+	os.chdir("addresses")
 
 	file = open(filename, "r")
 	text = file.read()
+
+	os.chdir(original_dir)
 
 	count = 0
 	for word in text:
@@ -148,21 +152,102 @@ def mostquestions():
 	"""
 
 	L = os.listdir("addresses") 
-	os.chdir( "addresses" )
 
 	d = {}
 	count = 0
 
 
 	for filename in L:
+		if filename.endswith(".txt"):
 			if filename not in d:
 				d[filename] = countquestions(filename)
 
-	os.chdir("..")
 
 	most = max(d.values())
 
 	return most
+
+
+""" WE V I """ 
+
+def compare_two_most(filename1, filename2, iwe):
+	
+	filename1number = filename1[iwe]
+	filename2number = filename2[iwe]
+	if filename1number > filename2number:
+		return filename1
+	else:
+		return filename2
+
+def compare_two_least(filename1, filename2, iwe):
+	
+	filename1number = filename1[iwe]
+	filename2number = filename2[iwe]
+	if filename1number < filename2number:
+		return filename1
+	else:
+		return filename2
+
+
+def i_v_we(filename):
+	original_dir = os.getcwd()
+	os.chdir("addresses")
+	file = open(filename, "r")
+	os.chdir(original_dir)
+	text = file.read()
+	text = text.lower()
+	text = text.split()
+	wes = 0
+	eyes = 0
+	for word in text:
+		if word == "we":
+			wes += 1
+		if word == "i":
+			eyes += 1
+	"""print(filename, "-> I:", eyes, "We:", wes)"""
+	return [filename, eyes, wes]
+
+def pronouns():
+	L = L = os.listdir("addresses") 
+	mostI = ["0000.txt", 0, 0]
+	mostWe = ["0000.txt", 0, 0]
+	leastI = ["0000.txt", 9000000, 9000000]
+	leastWe = ["0000.txt", 9000000, 9000000]
+	for filename in L:
+		if filename.endswith(".txt"):
+			new = i_v_we(filename)
+			biggerI = compare_two_most(mostI, new, 1)
+			mostI = biggerI
+			biggerWe = compare_two_most(mostWe, new, 2)
+			mostWe = biggerWe
+			smallerI = compare_two_least(leastI, new, 1)
+			leastI = smallerI
+			smallerWe = compare_two_least(leastWe, new, 2)
+			leastWe = smallerWe
+	return [mostI, mostWe, leastI, leastWe]
+
+def length(filename):
+	file = open(filename, "r")
+	text = file.read()
+
+	return len(text)
+
+
+def longest():
+	L = os.listdir("addresses") 
+	os.chdir( "addresses" )
+
+	d = {}
+
+	for filename in L:
+		if filename.endswith(".txt"):
+			if filename not in d:
+				d[filename] = length(filename)
+	os.chdir("..")
+
+	longest = max(d.values())
+
+	return longest
 
 
 
@@ -173,6 +258,14 @@ def main():
 	fourAnswer = fours()
 	print ('The year ', fourAnswer[0], ' has the most four letter words totaling ', fourAnswer[1])
 	print('The year 1861 has the most number of questions totaling ' , mostquestions())
+
+	pros = pronouns()
+	print('In, ',pros[0][0], 'of all the addresses, the most I\'s were used, ',pros[0][1])
+	print('While in, ',pros[2][0], 'of all the addresses, the fewest I\'s were used, ',pros[2][1])
+	print('In contrast, in', pros[1][0], 'there was the greatest use of the word we at', pros[1][2])
+	print('Finally, in', pros[3][0], 'the fewest uses of the word we came in at', pros[3][2])
+	print('To see full output of uses, uncomment the print statement in i_v_we')
+	print('The most words used in a speech was', longest())
 
 
 """ 
