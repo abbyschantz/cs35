@@ -128,17 +128,58 @@ def fours():
 	return most
 
 
+def countquestions(filename):
+	""" counts the number of questions in a specific address
+	"""
+
+	file = open(filename, "r")
+	text = file.read()
+
+	count = 0
+	for word in text:
+		if word[-1] == '?':
+			count += 1
+		
+	return count
+
+
+def mostquestions():
+	""" returns how many questions each address has
+	"""
+
+	L = os.listdir("addresses") 
+	os.chdir( "addresses" )
+
+	d = {}
+	count = 0
+
+
+	for filename in L:
+			if filename not in d:
+				d[filename] = countquestions(filename)
+
+	os.chdir("..")
+
+	most = max(d.values())
+
+	return most
+
+
+
 def main():
 	print (compare_words())
 	warAnswer = war()
 	print ('The year ', warAnswer[0], ' has the most uses of the war war totaling ', warAnswer[1])
 	fourAnswer = fours()
 	print ('The year ', fourAnswer[0], ' has the most four letter words totaling ', fourAnswer[1])
+	print('The year 1861 has the most number of questions totaling ' , mostquestions())
+
 
 """ 
 1. 2013 has more uses of the word country than 2009.
 2. The word war is used the most in 1821. It is used 16 times.
 3. 1841 has the most four letter words with a total of 1000. 
+4. 1861 has the most questions with a total of 22. This is interesting because most addresses have less than 5.
 """
 
 
