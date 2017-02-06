@@ -3,6 +3,7 @@
 # 
 
 import csv
+import re
 
 #
 # readcsv is a starting point - it returns the rows from a standard csv file...
@@ -74,6 +75,7 @@ def annotate_text_starter( text, annotations ):
           + text = "Bees that buzz -\nand kids that blow dandelion fuzz..."
     """
     new_html_string = ''
+    broken_html_string = ''
     split = text.split()
     for c in split:    # letter-by-letter!
         print (c)
@@ -85,8 +87,8 @@ def annotate_text_starter( text, annotations ):
             new_c = annotations[c] + " "
             #new_c = '<span style="color:{0};">{1}</span>'.format("red", c)
         #styles
-        elif c == 'his':
-            new_c = '<span style="color:{0};">{1}</span>'.format("red", c) + " "
+        elif c == 'TREE!' or c == 'TREE.':
+            new_c = '<span style="color:{0};">{1}</span>'.format("green", c) + " "
         #new lines
         elif c == '\n':  # handle new lines...
             new_c = "<br>"
@@ -99,7 +101,14 @@ def annotate_text_starter( text, annotations ):
         new_html_string += new_c
 
     # finished!
-    return new_html_string.rstrip()
+    new_html_string = re.sub(r"([!?.])(?=\s*[A-Z])",r"\1\n",new_html_string)
+    for x in new_html_string:
+        if x == '\n':
+            new_x = "<br>"
+        else:
+            new_x = x 
+        broken_html_string += new_x
+    return broken_html_string
 
 
 
@@ -139,3 +148,146 @@ HAMLET_SUBS = { "doth":"does", "rouse":"partying",
 #
 # You can see the output in  hamlet_substitution.html
 #
+
+
+### GREEN EGGS AND HAM, DOCTOR SEUSS ####
+
+SEUSS_SUBS = {"HAM":"SPAM", "SAM":"PAM"}
+
+SEUSS = """ 
+"GREEN EGGS AND HAM" (by Doctor Seuss) 
+
+I AM SAM. I AM SAM. SAM I AM.
+
+THAT SAM-I-AM! THAT SAM-I-AM! I DO NOT LIKE THAT SAM-I-AM!
+
+DO WOULD YOU LIKE GREEN EGGS AND HAM?
+
+I DO NOT LIKE THEM,SAM-I-AM.
+I DO NOT LIKE GREEN EGGS AND HAM.
+
+WOULD YOU LIKE THEM HERE OR THERE?
+
+I WOULD NOT LIKE THEM HERE OR THERE.
+I WOULD NOT LIKE THEM ANYWHERE.
+I DO NOT LIKE GREEN EGGS AND HAM.
+I DO NOT LIKE THEM, SAM-I-AM.
+
+WOULD YOU LIKE THEM IN A HOUSE?
+WOULD YOU LIKE THEN WITH A MOUSE?
+
+I DO NOT LIKE THEM IN A HOUSE.
+I DO NOT LIKE THEM WITH A MOUSE.
+I DO NOT LIKE THEM HERE OR THERE.
+I DO NOT LIKE THEM ANYWHERE.
+I DO NOT LIKE GREEN EGGS AND HAM.
+I DO NOT LIKE THEM, SAM-I-AM.
+
+WOULD YOU EAT THEM IN A BOX?
+WOULD YOU EAT THEM WITH A FOX?
+
+NOT IN A BOX. NOT WITH A FOX.
+NOT IN A HOUSE. NOT WITH A MOUSE.
+I WOULD NOT EAT THEM HERE OR THERE.
+I WOULD NOT EAT THEM ANYWHERE.
+I WOULD NOT EAT GREEN EGGS AND HAM.
+I DO NOT LIKE THEM, SAM-I-AM.
+
+WOULD YOU? COULD YOU? IN A CAR?
+EAT THEM! EAT THEM! HERE THEY ARE.
+
+I WOULD NOT, COULD NOT, IN A CAR.
+
+YOU MAY LIKE THEM. YOU WILL SEE.
+YOU MAY LIKE THEM IN A TREE!
+
+I WOULD NOT, COULD NOT IN A TREE.
+NOT IN A CAR! YOU LET ME BE.
+I DO NOT LIKE THEM IN A BOX.
+I DO NOT LIKE THEM WITH A FOX.
+I DO NOT LIKE THEM IN A HOUSE.
+I DO NOT LIKE THEM WITH A MOUSE.
+I DO NOT LIKE THEM HERE OR THERE.
+I DO NOT LIKE THEM ANYWHERE.
+I DO NOT LIKE GREEN EGGS AND HAM.
+I DO NOT LIKE THEM, SAM-I-AM.
+
+A TRAIN! A TRAIN! A TRAIN! A TRAIN!
+COULD YOU, WOULD YOU ON A TRAIN?
+
+NOT ON TRAIN! NOT IN A TREE!
+NOT IN A CAR! SAM! LET ME BE!
+I WOULD NOT, COULD NOT, IN A BOX.
+I WOULD NOT, COULD NOT, WITH A FOX.
+I WILL NOT EAT THEM IN A HOUSE.
+I WILL NOT EAT THEM HERE OR THERE.
+I WILL NOT EAT THEM ANYWHERE.
+I DO NOT EAT GREEM EGGS AND HAM.
+I DO NOT LIKE THEM, SAM-I-AM.
+
+SAY! IN THE DARK? HERE IN THE DARK!
+WOULD YOU, COULD YOU, IN THE DARK?
+
+I WOULD NOT, COULD NOT, IN THE DARK.
+
+WOULD YOU COULD YOU IN THE RAIN?
+
+I WOULD NOT, COULD NOT IN THE RAIN.
+NOT IN THE DARK. NOT ON A TRAIN.
+NOT IN A CAR. NOT IN A TREE.
+I DO NOT LIKE THEM, SAM, YOU SEE.
+NOT IN A HOUSE. NOT IN A BOX.
+NOT WITH A MOUSE. NOT WITH A FOX.
+I WILL NOT EAT THEM HERE OR THERE.
+I DO NOT LIKE THEM ANYWHERE!
+
+YOU DO NOT LIKE GREEN EGGS AND HAM?
+
+I DO NOT LIKE THEM, SAM-I-AM.
+
+COULD YOU, WOULD YOU, WITH A GOAT?
+
+I WOULD NOT, COULD NOT WITH A GOAT!
+
+WOULD YOU, COULD YOU, ON A BOAT?
+
+I COULD NOT, WOULD NOT, ON A BOAT.
+I WILL NOT, WILL NOT, WITH A GOAT.
+I WILL NOT EAT THEM IN THE RAIN.
+NOT IN THE DARK! NOT IN A TREE!
+NOT IN A CAR! YOU LET ME BE!
+I DO NOT LIKE THEM IN A BOX.
+I DO NOT LIKE THEM WITH A FOX.
+I WILL NOT EAT THEM IN A HOUSE.
+I DO NOT LIKE THEM WITH A MOUSE.
+I DO NOT LIKE THEM HERE OR THERE.
+I DO NOT LIKE THEM ANYWHERE!
+I DO NOT LIKE GREEN EGGS AND HAM!
+I DO NOT LIKE THEM, SAM-I-AM.
+
+YOU DO NOT LIKE THEM. SO YOU SAY.
+TRY THEM! TRY THEM! AND YOU MAY.
+TRY THEM AND YOU MAY, I SAY.
+
+SAM! IF YOU LET ME BE,
+I WILL TRY THEM. YOU WILL SEE.
+
+(... and he tries them ...)
+
+SAY! I LIKE GREEN EGGS AND HAM!
+I DO! I LIKE THEM, SAM-I-AM!
+AND I WOULD EAT THEM IN A BOAT.
+AND I WOULD EAT THEM WITH A GOAT...
+AND I WILL EAT THEM, IN THE RAIN.
+AND IN THE DARK. AND ON A TRAIN.
+AND IN A CAR. AND IN A TREE.
+THEY ARE SO GOOD, SO GOOD, YOU SEE!
+SO I WILL EAT THEM IN A BOX.
+AND I WILL EAT THEM WITH A FOX.
+AND I WILL EAT THEM IN A HOUSE.
+AND I WILL EAT THEM WITH A MOUSE.
+AND I WILL EAT THEM HERE AND THERE.
+SAY! I WILL EAT THEM ANYWHERE!
+I DO SO LIKE GREEN EGGS AND HAM!
+THANK YOU! THANK YOU, SAM I AM.
+"""
