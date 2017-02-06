@@ -139,6 +139,24 @@ def output_first_letter(csv_file_name):
     """ outputs a csv file for the first letter counter
     """
     D = first_letter_counter_weighted(csv_file_name)
+    E = last_letter_counter_weighted(csv_file_name)
+    F = first_last_equal_counter_weighted(csv_file_name)
+    
+    list_of_rows = []
+    for key, value in D.items():
+        list_of_rows.append((key,value))
+    
+    list_of_rows.sort()
+    
+    write_to_csv( list_of_rows, "firstletter.csv")
+
+
+
+
+def output_first_letter(csv_file_name):
+    """ outputs a csv file for the first letter counter
+    """
+    D = first_letter_counter_weighted(csv_file_name)
     
     list_of_rows = []
     for key, value in D.items():
