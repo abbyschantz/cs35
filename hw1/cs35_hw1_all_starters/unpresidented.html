@@ -1,0 +1,131 @@
+<!DOCTYPE html>  <!-- Use w3schools for reference and prototyping, if you'd like -->
+
+<html>
+<head>
+<title>Inaugural Address Analysis</title>
+<table border="0" width="55%" height="12" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+		<marquee scrollamount="9" style="font-family: Comic Sans MS; font-size: 50pt; color: #FF0000; font-weight: bold">Inaugural Address Analysis</marquee></td>
+	</tr>
+</table>
+</head>
+<style>
+h2, p {
+text-align: center;
+    font-style: bold;
+}
+#table1, td, th {
+    color: black;
+    border: 10px solid black;
+border-radius: 10px;
+    background-color: RGB(0,255,255);
+    color: white;
+    text-align: center;
+}
+#table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    padding: 15px;   
+}
+th {
+    height: 50px;
+}
+
+</style>
+
+
+
+<script> 
+var text="These tables summarize textual analysis of selected presidential inaugural addresses. The Python scripts that support the analysis are part of the accompanying repository."
+var speed=80 
+
+if (document.all||document.getElementById){
+document.write('<span id="highlight">' + text + '</span>')
+var storetext=document.getElementById? document.getElementById("highlight") : document.all.highlight
+}
+else
+document.write(text)
+var hex=new Array("00","14","28","3C","50","64","78","8C","A0","B4","C8","DC","F0")
+var r=1
+var g=1
+var b=1
+var seq=1
+function changetext(){
+rainbow="#"+hex[r]+hex[g]+hex[b]
+storetext.style.color=rainbow
+}
+function change(){
+if (seq==6){
+b--
+if (b==0)
+seq=1
+}
+if (seq==5){
+r++
+if (r==12)
+seq=6
+}
+if (seq==4){
+g--
+if (g==0)
+seq=5
+}
+if (seq==3){
+b++
+if (b==12)
+seq=4
+}
+if (seq==2){
+r--
+if (r==0)
+seq=3
+}
+if (seq==1){
+g++
+if (g==12)
+seq=2
+}
+changetext()
+}
+function starteffect(){
+if (document.all||document.getElementById)
+flash=setInterval("change()",speed)
+}
+starteffect()
+</script>
+
+<body style="background-color:#cccc33">
+ <IMG SRC="http://rs665.pbsrc.com/albums/vv18/sPaRTaNxXx09/Alien/Alien.gif~c200">
+<p align="center">
+<font size="4" face="Comic Sans MS"><span style="background-color: #FFFF00">
+YEAR/PRESIDENT </span>&nbsp;<span style="background-color: Purple"># of "spam"s        <span style="background-color: #FF1111"> # of "coffee"s <br>
+
+<table id="table1" border="1" width="100%" cellspacing="1" cellpadding="4" bgcolor="#FFFFFF" bordercolor="#808080">
+<tr>
+   <td>Year/President</td>
+   <td># of "spam"s</td>
+   <td># of "coffee"s</td>
+</tr>
+<tr>
+   <td>2013 - Barack Obama</td>
+   <td>16 "spam"s</td>
+   <td>42 "coffee"s</td>
+</tr>
+<tr>
+   <td>2009 - Barack Obama</td>
+   <td>9 "spam"s</td>
+   <td>4 "coffee"s</td>
+</tr>
+<tr>
+   <td>2005 - George W. Bush</td>
+   <td>25 "spam"s</td>
+   <td>2 "coffee"s</td>
+</tr>
+</table>
+
+</body>
+
+</html>
