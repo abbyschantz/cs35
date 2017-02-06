@@ -1,0 +1,3 @@
+1 https://github.com/abbyschantz/cs35/blob/master/hw1/cs35_hw1_all_starters/president_start.html
+2 https://github.com/abbyschantz/cs35/blob/master/hw1/cs35_hw1_all_starters/hw1pr2_starter.py
+3 https://github.com/abbyschantz/cs35/blob/master/hw1/cs35_hw1_all_starters/hw1pr3_starter.py
