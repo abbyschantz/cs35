@@ -1,0 +1,451 @@
+{
+  "destination_addresses": [
+    "Las Vegas, NV, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "8 hours 25 mins",
+            "value": 30319
+          },
+          "distance": {
+            "text": "917 km",
+            "value": 916519
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "San Francisco, CA, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Boston, MA, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "1 day 21 hours",
+            "value": 160933
+          },
+          "distance": {
+            "text": "4,989 km",
+            "value": 4988914
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "San Francisco, CA, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Portland, ME, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "1 day 22 hours",
+            "value": 165993
+          },
+          "distance": {
+            "text": "5,147 km",
+            "value": 5147176
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "San Francisco, CA, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Las Vegas, NV, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "1 day 12 hours",
+            "value": 130642
+          },
+          "distance": {
+            "text": "4,060 km",
+            "value": 4059522
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "New York, NY, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Boston, MA, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "3 hours 37 mins",
+            "value": 13042
+          },
+          "distance": {
+            "text": "346 km",
+            "value": 346159
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "New York, NY, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Portland, ME, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "5 hours 2 mins",
+            "value": 18101
+          },
+          "distance": {
+            "text": "504 km",
+            "value": 504421
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "New York, NY, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Las Vegas, NV, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "3 hours 27 mins",
+            "value": 12406
+          },
+          "distance": {
+            "text": "386 km",
+            "value": 385511
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Claremont, CA, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Boston, MA, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "1 day 18 hours",
+            "value": 152185
+          },
+          "distance": {
+            "text": "4,752 km",
+            "value": 4751695
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Claremont, CA, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Portland, ME, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "1 day 20 hours",
+            "value": 157245
+          },
+          "distance": {
+            "text": "4,910 km",
+            "value": 4909957
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Claremont, CA, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Las Vegas, NV, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "1 day 4 hours",
+            "value": 101004
+          },
+          "distance": {
+            "text": "3,154 km",
+            "value": 3154216
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Atlanta, GA, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Boston, MA, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "16 hours 15 mins",
+            "value": 58493
+          },
+          "distance": {
+            "text": "1,731 km",
+            "value": 1731057
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Atlanta, GA, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Portland, ME, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "17 hours 39 mins",
+            "value": 63553
+          },
+          "distance": {
+            "text": "1,889 km",
+            "value": 1889320
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Atlanta, GA, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Las Vegas, NV, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "1 day 4 hours",
+            "value": 99351
+          },
+          "distance": {
+            "text": "3,120 km",
+            "value": 3119877
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Cincinnati, OH, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Boston, MA, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "13 hours 2 mins",
+            "value": 46908
+          },
+          "distance": {
+            "text": "1,420 km",
+            "value": 1420421
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Cincinnati, OH, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Portland, ME, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "14 hours 26 mins",
+            "value": 51967
+          },
+          "distance": {
+            "text": "1,579 km",
+            "value": 1578684
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Cincinnati, OH, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Las Vegas, NV, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "1 day 13 hours",
+            "value": 132677
+          },
+          "distance": {
+            "text": "4,138 km",
+            "value": 4137781
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Westport, CT, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Boston, MA, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "2 hours 37 mins",
+            "value": 9412
+          },
+          "distance": {
+            "text": "262 km",
+            "value": 261784
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Westport, CT, USA"
+  ]
+}{
+  "destination_addresses": [
+    "Portland, ME, USA"
+  ],
+  "status": "OK",
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "OK",
+          "duration": {
+            "text": "4 hours 1 min",
+            "value": 14471
+          },
+          "distance": {
+            "text": "420 km",
+            "value": 420047
+          }
+        }
+      ]
+    }
+  ],
+  "origin_addresses": [
+    "Westport, CT, USA"
+  ]
+}
