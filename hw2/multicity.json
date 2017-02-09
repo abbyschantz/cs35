@@ -7,14 +7,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "8 hours 25 mins",
-            "value": 30319
+            "value": 30319,
+            "text": "8 hours 25 mins"
           },
+          "status": "OK",
           "distance": {
-            "text": "917 km",
-            "value": 916519
+            "value": 916519,
+            "text": "917 km"
           }
         }
       ]
@@ -32,14 +32,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "1 day 21 hours",
-            "value": 160933
+            "value": 160933,
+            "text": "1 day 21 hours"
           },
+          "status": "OK",
           "distance": {
-            "text": "4,989 km",
-            "value": 4988914
+            "value": 4988914,
+            "text": "4,989 km"
           }
         }
       ]
@@ -57,14 +57,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "1 day 22 hours",
-            "value": 165993
+            "value": 165993,
+            "text": "1 day 22 hours"
           },
+          "status": "OK",
           "distance": {
-            "text": "5,147 km",
-            "value": 5147176
+            "value": 5147176,
+            "text": "5,147 km"
           }
         }
       ]
@@ -82,14 +82,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "1 day 12 hours",
-            "value": 130642
+            "value": 130642,
+            "text": "1 day 12 hours"
           },
+          "status": "OK",
           "distance": {
-            "text": "4,060 km",
-            "value": 4059522
+            "value": 4059522,
+            "text": "4,060 km"
           }
         }
       ]
@@ -107,14 +107,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "3 hours 37 mins",
-            "value": 13042
+            "value": 13042,
+            "text": "3 hours 37 mins"
           },
+          "status": "OK",
           "distance": {
-            "text": "346 km",
-            "value": 346159
+            "value": 346159,
+            "text": "346 km"
           }
         }
       ]
@@ -132,14 +132,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "5 hours 2 mins",
-            "value": 18101
+            "value": 18101,
+            "text": "5 hours 2 mins"
           },
+          "status": "OK",
           "distance": {
-            "text": "504 km",
-            "value": 504421
+            "value": 504421,
+            "text": "504 km"
           }
         }
       ]
@@ -157,14 +157,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "3 hours 27 mins",
-            "value": 12406
+            "value": 12406,
+            "text": "3 hours 27 mins"
           },
+          "status": "OK",
           "distance": {
-            "text": "386 km",
-            "value": 385511
+            "value": 385511,
+            "text": "386 km"
           }
         }
       ]
@@ -182,14 +182,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "1 day 18 hours",
-            "value": 152185
+            "value": 152185,
+            "text": "1 day 18 hours"
           },
+          "status": "OK",
           "distance": {
-            "text": "4,752 km",
-            "value": 4751695
+            "value": 4751695,
+            "text": "4,752 km"
           }
         }
       ]
@@ -207,14 +207,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "1 day 20 hours",
-            "value": 157245
+            "value": 157245,
+            "text": "1 day 20 hours"
           },
+          "status": "OK",
           "distance": {
-            "text": "4,910 km",
-            "value": 4909957
+            "value": 4909957,
+            "text": "4,910 km"
           }
         }
       ]
@@ -232,14 +232,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "1 day 4 hours",
-            "value": 101004
+            "value": 101004,
+            "text": "1 day 4 hours"
           },
+          "status": "OK",
           "distance": {
-            "text": "3,154 km",
-            "value": 3154216
+            "value": 3154216,
+            "text": "3,154 km"
           }
         }
       ]
@@ -257,14 +257,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "16 hours 15 mins",
-            "value": 58493
+            "value": 58493,
+            "text": "16 hours 15 mins"
           },
+          "status": "OK",
           "distance": {
-            "text": "1,731 km",
-            "value": 1731057
+            "value": 1731057,
+            "text": "1,731 km"
           }
         }
       ]
@@ -282,14 +282,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "17 hours 39 mins",
-            "value": 63553
+            "value": 63553,
+            "text": "17 hours 39 mins"
           },
+          "status": "OK",
           "distance": {
-            "text": "1,889 km",
-            "value": 1889320
+            "value": 1889320,
+            "text": "1,889 km"
           }
         }
       ]
@@ -307,14 +307,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "1 day 4 hours",
-            "value": 99351
+            "value": 99351,
+            "text": "1 day 4 hours"
           },
+          "status": "OK",
           "distance": {
-            "text": "3,120 km",
-            "value": 3119877
+            "value": 3119877,
+            "text": "3,120 km"
           }
         }
       ]
@@ -332,14 +332,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "13 hours 2 mins",
-            "value": 46908
+            "value": 46908,
+            "text": "13 hours 2 mins"
           },
+          "status": "OK",
           "distance": {
-            "text": "1,420 km",
-            "value": 1420421
+            "value": 1420421,
+            "text": "1,420 km"
           }
         }
       ]
@@ -357,14 +357,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "14 hours 26 mins",
-            "value": 51967
+            "value": 51967,
+            "text": "14 hours 26 mins"
           },
+          "status": "OK",
           "distance": {
-            "text": "1,579 km",
-            "value": 1578684
+            "value": 1578684,
+            "text": "1,579 km"
           }
         }
       ]
@@ -382,14 +382,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "1 day 13 hours",
-            "value": 132677
+            "value": 132677,
+            "text": "1 day 13 hours"
           },
+          "status": "OK",
           "distance": {
-            "text": "4,138 km",
-            "value": 4137781
+            "value": 4137781,
+            "text": "4,138 km"
           }
         }
       ]
@@ -407,14 +407,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "2 hours 37 mins",
-            "value": 9412
+            "value": 9412,
+            "text": "2 hours 37 mins"
           },
+          "status": "OK",
           "distance": {
-            "text": "262 km",
-            "value": 261784
+            "value": 261784,
+            "text": "262 km"
           }
         }
       ]
@@ -432,14 +432,14 @@
     {
       "elements": [
         {
-          "status": "OK",
           "duration": {
-            "text": "4 hours 1 min",
-            "value": 14471
+            "value": 14471,
+            "text": "4 hours 1 min"
           },
+          "status": "OK",
           "distance": {
-            "text": "420 km",
-            "value": 420047
+            "value": 420047,
+            "text": "420 km"
           }
         }
       ]

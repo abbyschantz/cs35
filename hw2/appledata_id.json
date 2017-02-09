@@ -1,0 +1,42 @@
+{
+  "resultCount": 4,
+  "results": [
+    {
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/kanye/id373941524?uo=4",
+      "wrapperType": "artist",
+      "primaryGenreName": "Hip-Hop/Rap",
+      "primaryGenreId": 18,
+      "artistId": 373941524,
+      "artistName": "Kanye",
+      "artistType": "Artist"
+    },
+    {
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/kanye-west/id2715720?uo=4",
+      "wrapperType": "artist",
+      "primaryGenreName": "Hip-Hop/Rap",
+      "amgArtistId": 353484,
+      "primaryGenreId": 18,
+      "artistId": 2715720,
+      "artistName": "Kanye West",
+      "artistType": "Artist"
+    },
+    {
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/kanye-best/id476920876?uo=4",
+      "wrapperType": "artist",
+      "primaryGenreName": "Electronic",
+      "primaryGenreId": 7,
+      "artistId": 476920876,
+      "artistName": "Kanye Best",
+      "artistType": "Artist"
+    },
+    {
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/kanye-chainz/id550051937?uo=4",
+      "wrapperType": "artist",
+      "primaryGenreName": "Hip-Hop/Rap",
+      "primaryGenreId": 18,
+      "artistId": 550051937,
+      "artistName": "Kanye Chainz",
+      "artistType": "Artist"
+    }
+  ]
+}

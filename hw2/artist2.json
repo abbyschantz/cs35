@@ -1,0 +1,34 @@
+{
+  "resultCount": 2,
+  "results": [
+    {
+      "artistLinkUrl": "https://itunes.apple.com/us/artist/kanye/id373941524?uo=4",
+      "wrapperType": "artist",
+      "primaryGenreName": "Hip-Hop/Rap",
+      "primaryGenreId": 18,
+      "artistId": 373941524,
+      "artistName": "Kanye",
+      "artistType": "Artist"
+    },
+    {
+      "collectionCensoredName": "Thunderstorm (feat. Ruben Hultman) - Single",
+      "artworkUrl60": "http://is2.mzstatic.com/image/thumb/Music122/v4/40/19/fe/4019fe4e-e742-a5ae-b76f-7a9e2b6835aa/source/60x60bb.jpg",
+      "wrapperType": "collection",
+      "collectionViewUrl": "https://itunes.apple.com/us/album/thunderstorm-feat.-ruben-hultman/id1190227822?uo=4",
+      "artistViewUrl": "https://itunes.apple.com/us/artist/retinue/id633455758?uo=4",
+      "artworkUrl100": "http://is2.mzstatic.com/image/thumb/Music122/v4/40/19/fe/4019fe4e-e742-a5ae-b76f-7a9e2b6835aa/source/100x100bb.jpg",
+      "collectionExplicitness": "notExplicit",
+      "collectionId": 1190227822,
+      "artistId": 633455758,
+      "collectionName": "Thunderstorm (feat. Ruben Hultman) - Single",
+      "trackCount": 2,
+      "artistName": "Retinue & Kayne & Lorenz",
+      "primaryGenreName": "Dance",
+      "currency": "USD",
+      "releaseDate": "2017-02-10T08:00:00Z",
+      "collectionType": "Album",
+      "copyright": "\u2117 2017 1NAM",
+      "country": "USA"
+    }
+  ]
+}
