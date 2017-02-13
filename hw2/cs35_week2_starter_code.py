@@ -347,6 +347,63 @@ import datetime
 ## Playground! Use this space to explore and play around with the USGS API
 #
 
+
+def quake_api_count_scraper(starttime, endtime, filename_to_save="quakedata_id.json"):
+    """ 
+    """
+    ### Use the search url to get an artist's itunes ID
+    url = "http://earthquake.usgs.gov/fdsnws/event/1/count"
+    parameters={"format":"geojson","limit":"20000","starttime":starttime,"endtime":endtime}
+    result = requests.get(url,params=parameters)
+    data = result.json()
+    print(data)
+
+    # save to a file to examine it...
+    f = open( filename_to_save, "w" )     # opens the file for writing
+    string_data = json.dumps( data, indent=2 )  # this writes it to a string
+    f.write(string_data)                        # then, writes that string to a file...
+    f.close()                                   # and closes the file
+    print("\nfile", filename_to_save, "written.")
+    return data["count"]
+
+
+
+def quake_api_full_process(filename_to_read):
+    """ example of extracting one (small) piece of information from 
+        the appledata json file...
+    """
+    f = open( filename_to_read, "r" )
+    string_data = f.read()
+    data = json.loads( string_data )
+    #print("data (not spiffified!) is\n\n", data, "\n")
+
+    # for live investigation, here's the full data structure
+    return data
+
+def quake_api_get_count(filename_to_read="quakedata_id.json"):
+    days = get_seven_dates()
+    max_quakes = ["0000-00-00", 0]
+    for day in days:
+        count = quake_api_count_scraper(day, "2017-02-12")
+        print (day, "had", count, "earthquakes")
+        if count > max_quakes[1]:
+            max_quakes = [day, count]
+    print("In the past seven days,",max_quakes[0], "had the most earthquakes at", max_quakes[1])
+    return 
+
+
+
+def get_seven_dates():
+    days_list = []
+    for i in range(7):
+        i_days_prior = datetime.date.today() - datetime.timedelta(days=i)
+        print (i_days_prior)
+        i -= 1
+        days_list.append(i_days_prior)
+    return days_list
+
+
+
 print("\nProblem 2b's starter-code results:\n")
 now = datetime.date.today()
 print("Now, the date is", now)   # counts from 0001-01-01
