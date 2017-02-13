@@ -358,6 +358,7 @@ def quake_api_count_scraper(starttime, endtime, filename_to_save="quakedata_id.j
     data = result.json()
     print(data)
 
+
     # save to a file to examine it...
     f = open( filename_to_save, "w" )     # opens the file for writing
     string_data = json.dumps( data, indent=2 )  # this writes it to a string
@@ -384,13 +385,14 @@ def quake_api_get_count(filename_to_read="quakedata_id.json"):
     days = get_seven_dates()
     max_quakes = ["0000-00-00", 0]
     for day in days:
-        count = quake_api_count_scraper(day, "2017-02-12")
+        end = day + datetime.timedelta(days=1)
+        count = quake_api_count_scraper(day, end)
+
         print (day, "had", count, "earthquakes")
         if count > max_quakes[1]:
             max_quakes = [day, count]
     print("In the past seven days,",max_quakes[0], "had the most earthquakes at", max_quakes[1])
     return 
-
 
 
 def get_seven_dates():
@@ -410,6 +412,10 @@ print("Now, the date is", now)   # counts from 0001-01-01
 print("Now, the ordinal value of the date is", now.toordinal())
 print("now.fromordinal(42) is", now.fromordinal(42))
 
+def main_pr2b():
+    """ runs the quake_api_get_count function
+    """
+    quake_api_get_count()
 
 
 #
