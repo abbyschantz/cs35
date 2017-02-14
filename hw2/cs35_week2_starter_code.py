@@ -496,8 +496,10 @@ def movie_api_full_process(filename_to_read="movie.json"):
 
 	# for live investigation, here's the full data structure
 	print(data["imdbRating"])
-	print(data["Actors"])
-	print(data["Actors"][0])
+	actors_string = data["Actors"]
+	actors_list = actors_string.split(",")
+	print(actors_list)
+	print(actors_list[0])
 	return data
 	
 
