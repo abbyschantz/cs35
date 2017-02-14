@@ -223,6 +223,30 @@ def barplot():
 	plt.ylim(-1.25,+1.25)
 	plt.show(block=False)
 
+def quiverplot():
+	import numpy as np
+	import matplotlib.pyplot as plt
+
+	n = 10
+	X,Y = np.mgrid[0:n,0:n]
+	T = np.arctan2(Y-n/2.0, X-n/2.0)
+	R = 10+np.sqrt((Y-n/2.0)**2+(X-n/2.0)**2)
+	U,V = R*np.cos(T), R*np.sin(T)
+
+	plt.axes([0.025,0.025,0.95,0.95])
+	plt.quiver(X,Y,U,V,R, alpha=.5)
+	plt.quiver(X,Y,U,V, edgecolor='white', facecolor='None', linewidth=.5)
+
+	ax = plt.gca()
+	ax.set_axis_bgcolor((0, 0, 0))
+
+
+	#adjusts the limits of the plot
+	plt.xlim(-1,n), plt.xticks([])
+	plt.ylim(-1,n), plt.yticks([])
+
+	# savefig('../figures/quiver_ex.png',dpi=48)
+	plt.show(block=False)
 
 
 #
