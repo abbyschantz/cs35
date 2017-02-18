@@ -17,7 +17,7 @@
 
 """
 Short description of (1) the features you compute for each rps-string and 
-      (2) how you score those features and how those scores relate to "humanness" or "machineness"
+	  (2) how you score those features and how those scores relate to "humanness" or "machineness"
 
 
 
@@ -32,11 +32,11 @@ Short description of (1) the features you compute for each rps-string and
 import random
 
 def gen_rps_string( num_characters ):
-    """ return a uniformly random rps string with num_characters characters """
-    result = ''
-    for i in range( num_characters ):
-        result += random.choice( 'rps' )
-    return result
+	""" return a uniformly random rps string with num_characters characters """
+	result = ''
+	for i in range( num_characters ):
+		result += random.choice( 'rps' )
+	return result
 
 # Here are two example machine-generated strings:
 rps_machine1 = gen_rps_string(200)
@@ -52,13 +52,34 @@ from collections import defaultdict
 # extract_features( rps ):   extracts features from rps into a defaultdict
 #
 def extract_features( rps ):
-    """ <include a docstring here!>
-    """
-    d = defaultdict( float )  # other features are reasonable
-    number_of_s_es = rps.count('s')  # counts all of the 's's in rps
-    d['s'] = 42                      # doesn't use them, however
-    return d   # return our features... this is unlikely to be very useful, as-is
+	""" <include a docstring here!>
+	
+	#d = defaultdict( float )  # other features are reasonable
+	#number_of_s_es = rps.count('s')  # counts all of the 's's in rps
+	#d['s'] = 42                      # doesn't use them, however
+	#return d   # return our features... this is unlikely to be very useful, as-is
 
+	#d = defaultdict( float )  # other features are reasonable
+	"""
+	d = {}
+	
+	length = 1
+	for i in range(len(rps)):
+		if i == len(rps)-1:
+			print(rps[i])
+			if length in d:
+				d[length] += 1
+			else:
+				d[length] = 1
+		elif rps[i] == rps[i+1]:
+			length += 1
+		else:
+			if length in d:
+				d[length] += 1
+			else:
+				d[length] = 1
+			length = 1
+	return d
 
 
 
@@ -68,12 +89,12 @@ def extract_features( rps ):
 # score_features( dict_of_features ): returns a score based on those features
 #
 def score_features( dict_of_features ):
-    """ <include a docstring here!>
-    """
-    d = dict_of_features
-    random_value = random.uniform(0,1)
-    score = d['s'] * random_value
-    return score   # return a humanness or machineness score
+	""" <include a docstring here!>
+	"""
+	d = dict_of_features
+	random_value = random.uniform(0,1)
+	score = d['s'] * random_value
+	return score   # return a humanness or machineness score
 
 
 
@@ -85,11 +106,11 @@ def score_features( dict_of_features ):
 # read_data( filename="rps.csv" ):   gets all of the data from "rps.csv"
 #
 def read_data( filename="rps.csv" ):
-    """ <include a docstring here!>
-    """
-    # you'll want to look back at reading a csv file!
-    List_of_rows = []   # for now...
-    return List_of_rows
+	""" <include a docstring here!>
+	"""
+	# you'll want to look back at reading a csv file!
+	List_of_rows = []   # for now...
+	return List_of_rows
 
 
 
