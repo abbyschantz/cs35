@@ -93,10 +93,10 @@ def datavis1():
     # save to file
     fig.savefig('datavis1.png', bbox_inches='tight')
     # and show it on the screen
-    plt.show()
+    plt.show(block=False)
 
 # run it!
-datavis1()
+#datavis1()
 
 
 #
@@ -161,10 +161,10 @@ def datavis2():
         # save to file
         fig.savefig('datavis2.png', bbox_inches='tight')
         # and show it on the screen
-        show()
+        show(block=False)
 
 # run it!
-datavis2()
+#datavis2()
 
 
 
