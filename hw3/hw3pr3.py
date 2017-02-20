@@ -1,189 +1,188 @@
 #
-# hw3pr3.py 
 #
-# Visualizing your own data with matplotlib...
-#
-# Here, you should include functions that produce two visualizations of data
-#   of your own choice. Also, include a short description of the data and
-#   the visualizations you created. Save them as screenshots or as saved-images,
-#   named datavis1.png and datavis2.png in your hw3.zip folder.
+# Names: Liz Harder, Abby Schantz, Eliana Keinan
 # 
-# Gallery of matplotlib examples:   http://matplotlib.org/gallery.html
-#
-# List of many large-data sources:    https://docs.google.com/document/d/1dr2_Byi4I6KI7CQUTiMjX0FXRo-M9k6kB2OESd7a2ck/edit    
-#     and, the birthday data in birth.csv is a reasonable fall-back option, if you'd like to use that...
-#          you could create a heatmap or traditional graph of birthday frequency variations over the year...
-#
-
-"""
-Short description of the two data visualizations...
-
-
-    +++  Please don't use these two! These are simply placeholders (from xkcd...)  +++
-
-    They do show how to save out a plot to a file with fig.savefig , which is useful.
+# File: hw3pr3.py
 
 
 """
+The data set that we contains the findings based on a large-scale survey of fake news. 
+More specifically, the data shows how a specific user reacts to 11 potential articles. Each article 
+has been officailly labeled as True or False (Which we will called is_fake). In the accuracy_bool, 
+the participant states if they think the article is True or False (since this is the preceived 
+accuracy, we will call this prec_true). Because of the way the data is given, the state of the article 
+is given as FALSE if the article is Real and TRUE if the article is fake. This is the opposite of the 
+way that the preceived accuracy is presented as it is FALSE if the article is preceived to be false and 
+TRUE if the article is preceived to be real. 
 
+In datavis1, we use the information on accuracy to plot out how many articles are False and 
+preceived false, True and preceived true, False and precieved true, and True and precieved false. 
 
+In datavis2, we 
 
-#
-# datavis1()
-#
-"""
-From:  http://matplotlib.org/examples/showcase/xkcd.html
 """
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatch
 import numpy as np
+import pylab
+from matplotlib.patches import Polygon
+from matplotlib.ticker import MaxNLocator
+from matplotlib.ticker import FuncFormatter
+from csv import reader
+
+
+with open('headline-responses.csv', 'r') as f:
+    data = list(reader(f))
+
+is_fake = [i[8]for i in data]
+prec_true = [i[6]for i in data]
+headline = [i[1]for i in data]
+row_count = sum(1 for row in data)
+
+def news_match():
+    """ This function returns the number of submissions where the article was true/false 
+    news and it was also preceived to be true/false by the viwer. There are four categories 
+    all written in the formatt of (article state_preceived state)"""
+
+    real_real = 0 #real news and preceived to be real
+    real_fake = 0 #real news and preceived to be fake
+    fake_real = 0 #fake news and preceived to be real
+    fake_fake = 0 #fake news and preceived to be fake
+
+    for i in range(row_count):
+        if is_fake[i] == 'FALSE' and prec_true[i] == 'TRUE':
+            real_real += 1
+        if is_fake[i] == 'FALSE' and prec_true[i] == 'FALSE':
+            real_fake += 1
+        if is_fake[i] == 'TRUE' and prec_true[i] == 'TRUE':
+            fake_real += 1
+        if is_fake[i] == 'TRUE' and prec_true[i] == 'FALSE':
+            fake_fake += 1
+ 
+    return real_real, real_fake, fake_real, fake_fake
+
+#The following formulas calculate the percentage of each of the 4 categories using row count as the total number of entries
+rr_perc = (news_match()[0]/row_count)*100
+rf_perc = (news_match()[1]/row_count)*100
+fr_perc = (news_match()[2]/row_count)*100
+ff_perc = (news_match()[3]/row_count)*100
+
 
 def datavis1():
-    """ run this function for the first data visualization """
+    """This data visualization function inputs the formulas from above that calculate 
+    the percentage of responses in each of the four categories and outputs a pie chart 
+    of these results
+    """
     with plt.xkcd():
-        # Based on "Stove Ownership" from XKCD by Randall Monroe
-        # http://xkcd.com/418/
+    # The slices will be ordered and plotted counter-clockwise.
+        labels = 'Real News is Real', 'Real News is Fake', 'Fake News is Real', 'Fake News is Fake'
+        sizes = [rr_perc, rf_perc, fr_perc, ff_perc]
+        colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+        explode = (0, 0, 0.2, 0) # only "explode" the 2nd slice (i.e. 'Hogs')
 
-        fig = plt.figure()
-        ax = fig.add_axes((0.1, 0.2, 0.8, 0.7))
-        ax.spines['right'].set_color('none')
-        ax.spines['top'].set_color('none')
-        plt.xticks([])
-        plt.yticks([])
-        ax.set_ylim([-30, 10])
+        plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+                autopct='%1.1f%%', shadow=True, startangle=90)
+        plt.annotate('Percentage of people who think that...', xy=(0,1), xycoords='axes fraction' )
+        # Set aspect ratio to be equal so that pie is drawn as a circle.
+        plt.axis('equal')
+        plt.show()
 
-        data = np.ones(100)
-        data[70:] -= np.arange(30)
-
-        plt.annotate(
-            'THE DAY I REALIZED\nI COULD COOK BACON\nWHENEVER I WANTED',
-            xy=(70, 1), arrowprops=dict(arrowstyle='->'), xytext=(15, -10))
-
-        plt.plot(data)
-
-        plt.xlabel('time')
-        plt.ylabel('my overall health')
-        fig.text(
-            0.5, 0.05,
-            '"Stove Ownership" from xkcd by Randall Monroe',
-            ha='center')
-
-        # Based on "The Data So Far" from XKCD by Randall Monroe
-        # http://xkcd.com/373/
-
-        fig = plt.figure()
-        ax = fig.add_axes((0.1, 0.2, 0.8, 0.7))
-        ax.bar([0, 1], [0, 100], 0.25)
-        ax.spines['right'].set_color('none')
-        ax.spines['top'].set_color('none')
-        ax.xaxis.set_ticks_position('bottom')
-        ax.set_xticks([0, 1])
-        ax.set_xlim([-0.5, 1.5])
-        ax.set_ylim([0, 110])
-        ax.set_xticklabels(['CONFIRMED BY\nEXPERIMENT', 'REFUTED BY\nEXPERIMENT'])
-        plt.yticks([])
-
-        plt.title("CLAIMS OF SUPERNATURAL POWERS")
-
-        fig.text(
-            0.5, 0.05,
-            '"The Data So Far" from xkcd by Randall Monroe',
-            ha='center')
-
-    # save to file
-    fig.savefig('datavis1.png', bbox_inches='tight')
-    # and show it on the screen
-    plt.show()
-
-# run it!
-#datavis1()
-
-
-#
-# datavis2()
-#
-"""
-From:  http://matplotlib.org/xkcd/examples/pylab_examples/manual_axis.html
-"""
-
-import numpy as np
-from pylab import figure, show
-import matplotlib.lines as lines
-import matplotlib.pyplot as plt
-
-def make_xaxis(ax, yloc, offset=0.05, **props):
-    """ custom-axis (x) example 
+def article_count():
+    """this function inputs the headline-responses.csv column regarding which 
+    article (A,B,C,D,E,F,G,H,I,J,K) was recognized and counts the total number. 
+    The function returns the recognition count for each article
     """
-    xmin, xmax = ax.get_xlim()
-    locs = [loc for loc in ax.xaxis.get_majorticklocs()
-            if loc>=xmin and loc<=xmax]
-    tickline, = ax.plot(locs, [yloc]*len(locs),linestyle='',
-            marker=lines.TICKDOWN, **props)
-    axline, = ax.plot([xmin, xmax], [yloc, yloc], **props)
-    tickline.set_clip_on(False)
-    axline.set_clip_on(False)
-    for loc in locs:
-        ax.text(loc, yloc-offset, '%1.1f'%loc,
-                horizontalalignment='center',
-                verticalalignment='top')
+    art_a = 0
+    art_b = 0
+    art_c = 0
+    art_d = 0
+    art_e = 0
+    art_f = 0
+    art_g = 0
+    art_h = 0
+    art_i = 0
+    art_j = 0
+    art_k = 0
 
-def make_yaxis(ax, xloc=0, offset=0.05, **props):
-    """ custom-axis (y) example 
+    for i in range(row_count):
+        if headline[i] == 'A':
+            art_a += 1
+        if headline[i] == 'B':
+            art_b += 1
+        if headline[i] == 'C':
+            art_c += 1
+        if headline[i] == 'D':
+            art_d += 1
+        if headline[i] == 'E':
+            art_e += 1
+        if headline[i] == 'F':
+            art_f += 1
+        if headline[i] == 'G':
+            art_g += 1
+        if headline[i] == 'H':
+            art_h += 1
+        if headline[i] == 'I':
+            art_i += 1
+        if headline[i] == 'J':
+            art_j += 1
+        if headline[i] == 'K':
+            art_k += 1
+
+    return art_a, art_b, art_c, art_d, art_e, art_f, art_g, art_h, art_i, art_j, art_k
+
+def autolabel(rects):
     """
-    ymin, ymax = ax.get_ylim()
-    locs = [loc for loc in ax.yaxis.get_majorticklocs()
-            if loc>=ymin and loc<=ymax]
-    tickline, = ax.plot([xloc]*len(locs), locs, linestyle='',
-            marker=lines.TICKLEFT, **props)
-    axline, = ax.plot([xloc, xloc], [ymin, ymax], **props)
-    tickline.set_clip_on(False)
-    axline.set_clip_on(False)
-
-    for loc in locs:
-        ax.text(xloc-offset, loc, '%1.1f'%loc,
-                verticalalignment='center',
-                horizontalalignment='right')
+    Attach a text label above each bar displaying its height
+    """
+    for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()/2., 1.05*height,
+                '%d' % int(height),
+                ha='center', va='bottom')
 
 def datavis2():
-    """ run this function for the second data visualization """
-    with plt.xkcd():
-        props = dict(color='black', linewidth=2, markeredgewidth=2)
-        x = np.arange(200.)
-        y = np.sin(2*np.pi*x/200.) + np.random.rand(200)-0.5
-        fig = figure(facecolor='white')
-        ax = fig.add_subplot(111, frame_on=False)
-        ax.axison = False
-        ax.plot(x, y, 'd', markersize=8, markerfacecolor='blue')
-        ax.set_xlim(0, 200)
-        ax.set_ylim(-1.5, 1.5)
-        make_xaxis(ax, 0, offset=0.1, **props)
-        make_yaxis(ax, 0, offset=5, **props)
-        # save to file
-        fig.savefig('datavis2.png', bbox_inches='tight')
-        # and show it on the screen
-        show()
+    """This data visualization function inputs the formulas from above 
+    that calculate the amount of times each article was recalled by participants 
+    and outputs a bar graph of an article recognition score
+    The articles are as follows:
+    A: Pope Francis Shocks World, Endorses Donald Trump for President, Releases Statement (Fake)
+    B: Donald Trump Sent His Own Plane to Transport 200 Stranded Marines (Fake)
+    C: FBI Agent Suspected in Hillary Email Leaks Found Dead in Apparent Murder - Suicide (Fake)
+    D: Donald Trump Protester Speaks Out: “I Was Paid $3,500 to Protest Trump’s Rally” (Fake)
+    E: FBI Director Comey Just Put a Trump Sign On His Front Lawn (Fake)
+    F: Melania Trump’s Girl-on-Girl Photos From Racy Shoot Revealed (True)
+    G: Barbara Bush: “I don’t know how women can vote” for Trump (True)
+    H: Donald Trump Says He’d ‘Absolutely’ Require Muslims to Register (True)
+    I: Trump: “I Will Protect Our LGBTQ Citizens” (True)
+    J: I Ran the C.I.A Now I’m Endorsing Hillary Clinton (True)
+    K: Donald Trump on Refusing Presidential Salary: “I’m not taking it” (True)
+    """
+    n_groups = 11
+    scores = (article_count()[0], article_count()[1] ,article_count()[2] ,article_count()[3],article_count()[4],article_count()[5],article_count()[6],article_count()[7],article_count()[8],article_count()[9],article_count()[10])
+    fig, ax = plt.subplots()
+    
 
-# run it!
-#datavis2()
+    index = np.arange(n_groups)
+    bar_width = 0.5
 
-def test():
-    """Test for animated plot"""
-    x = np.arange(6)
-    y = np.arange(5)
-    z = x * y[:, np.newaxis]
+    opacity = 0.4
+    error_config = {'ecolor': '0.3'}
 
-    for i in range(5):
-        if i == 0:
-            p = plt.imshow(z)
-            fig = plt.gcf()
-            plt.clim()   # clamp the color limits
-            plt.title("Boring slide show")
-        else:
-            z = z + 2
-            p.set_data(z)
+    rects1 = plt.bar(index, scores, bar_width,
+                    alpha=opacity,
+                    color='b',
+                    error_kw=error_config)
 
-        print("step", i)
-        plt.pause(0.5)
+    plt.xlabel('Article')
+    plt.ylabel('Recognition Population')
+    plt.title('Recognition Population of Each Article')
+    plt.xticks(index + bar_width / 2, ('A', 'B', 'C', 'D', 'E','F','G','H','I','J','K'))
+    ax.text(1977, 67,
+        ("Percentage of the US Population\n"
+         "carrying cameras everywhere they go,\n"
+         "every waking moment of their lives:"),
+        size=16)
 
-
-
+    plt.tight_layout()
+    plt.show()
