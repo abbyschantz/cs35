@@ -93,7 +93,7 @@ def datavis1():
     # save to file
     fig.savefig('datavis1.png', bbox_inches='tight')
     # and show it on the screen
-    plt.show(block=False)
+    plt.show()
 
 # run it!
 #datavis1()
@@ -161,11 +161,29 @@ def datavis2():
         # save to file
         fig.savefig('datavis2.png', bbox_inches='tight')
         # and show it on the screen
-        show(block=False)
+        show()
 
 # run it!
 #datavis2()
 
+def test():
+    """Test for animated plot"""
+    x = np.arange(6)
+    y = np.arange(5)
+    z = x * y[:, np.newaxis]
+
+    for i in range(5):
+        if i == 0:
+            p = plt.imshow(z)
+            fig = plt.gcf()
+            plt.clim()   # clamp the color limits
+            plt.title("Boring slide show")
+        else:
+            z = z + 2
+            p.set_data(z)
+
+        print("step", i)
+        plt.pause(0.5)
 
 
 
