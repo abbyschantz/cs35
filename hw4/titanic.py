@@ -19,6 +19,10 @@ df.info()
 # Here's an example of dropping the 'body' column:
 df = df.drop('body', axis=1)  # axis = 1 means column
 df = df.drop('boat', axis=1)
+df = df.drop('cabin', axis=1)
+df = df.drop('home.dest', axis=1)
+df = df.drop('name', axis=1)
+df = df.drop('ticket', axis=1)
 
 # let's drop all of the rows with missing data:
 df = df.dropna()
@@ -41,6 +45,11 @@ def tr_mf(s):
 
 df['sex'] = df['sex'].map(tr_mf)  # apply the function to the column
 
+
+def tr_embark(s):
+	d = {'S': 0, 'C': 1, 'Q': 2}
+	return d[s]
+df['embarked'] = df['embarked'].map(tr_embark)
 # let's see our dataframe again...
 df.head()
 df.info()
@@ -93,7 +102,12 @@ y_train = y_data_full[44:]                  # the training outputs/labels (known
 
 # feature engineering...
 #X_data[:,0] *= 100   # maybe the first column is worth much more!
-#X_data[:,3] *= 100   # maybe the fourth column is worth much more!
+print("COL 1", X_data[:,1])
+X_data[:,1] *= 100   # maybe the fourth column is worth much more!
+print("COL 2", X_data[:,2])
+X_data[:,2] *= 100
+print("COL 5", X_data[:,5])
+X_data[:,5] *= 100
 
 
 
@@ -172,24 +186,41 @@ print(df)
 """
 Comments and results:
 
-Briefly mention how this went:
-  + what value of k did you decide on for your kNN?
-  + how high were you able to get the average cross-validation (testing) score?
+
+We got a k value of 1 and an average corss-validation score of 0.730962343096.
 
 
-
-Then, include the predicted labels of the 12 digits with full data but no label:
-Past those labels (just labels) here:
-You'll have 12 lines:
-
-
-
-
-And, include the predicted labels of the 10 digits that are "partially erased" and have no label:
-Mention briefly how you handled this situation!?
-
-Past those labels (just labels) here:
-You'll have 10 lines:
+      pclass  survived  sex   age  sibsp  parch      fare  embarked
+0          3         0    0  24.0      0      0    7.0500         0
+1          3         0    0  25.0      0      0    7.0500         0
+2          3         0    0  35.0      0      0    8.0500         0
+3          3         0    0  18.0      0      0    8.3000         0
+4          3         1    1  19.0      1      0    7.8542         0
+5          3         0    0  32.0      0      0   22.5250         0
+6          1         0    0  24.0      0      1  247.5208         1
+7          1         0    1  50.0      0      1  247.5208         1
+8          2         0    0   1.0      2      1   39.0000         0
+9          2         0    1   4.0      2      1   39.0000         0
+10         2         0    1  12.0      2      1   39.0000         0
+11         2         0    1  36.0      0      3   39.0000         0
+12         2         0    0  34.0      0      0   13.0000         0
+13         2         0    1  19.0      0      0   13.0000         0
+14         2         0    0  23.0      0      0   13.0000         0
+15         2         1    0  26.0      0      0   13.0000         0
+16         2         0    0  42.0      0      0   13.0000         0
+17         2         1    0  27.0      0      0   13.0000         0
+18         3         1    0   1.0      1      2   20.5750         0
+19         1         1    0  53.0      1      1   81.8583         0
+20         1         1    0   4.0      0      2   81.8583         0
+21         1         0    1  54.0      1      1   81.8583         0
+22         3         1    0  40.5      0      0   15.1000         0
+23         1         0    1  24.0      3      2  263.0000         0
+24         1         1    1  28.0      3      2  263.0000         0
+25         1         0    1  23.0      3      2  263.0000         0
+26         1         0    0  19.0      3      2  263.0000         0
+27         1         0    0  64.0      1      4  263.0000         0
+28         1         1    1  60.0      1      4  263.0000         0
+29         2         1    0  24.0      2      0   73.5000         0
 
 
 
