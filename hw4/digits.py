@@ -1,7 +1,8 @@
 #
 # Names: Eliana Keinan, Abby Schantz, Liz Harder
 # digits.py
-#
+# see GITHUB
+# https://github.com/abbyschantz/cs35/tree/master/hw4
 #
 
 import numpy as np

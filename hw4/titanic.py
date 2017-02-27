@@ -1,7 +1,8 @@
 #
-#
+# Abby, Eliana, and Liz
 # titanic.py
-#
+# SEE GITHUB 
+# https://github.com/abbyschantz/cs35/tree/master/hw4
 #
 
 import numpy as np
