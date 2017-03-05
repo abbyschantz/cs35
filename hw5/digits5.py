@@ -77,7 +77,6 @@ y_train = y_data_full[10:]                  # the training outputs/labels (known
 max_depth=4
 #
 
-test_score = []
 best_score = 0
 index = 0
 for i in range(1,11):
@@ -148,7 +147,7 @@ for max_depth in [1,2,3,4]:
 
 
 # here are some examples, printed out:
-print("iris_X_test's predicted outputs are")
+print("digit_X_test's predicted outputs are")
 print(dtree.predict(X_test))
 
 # and here are the actual labels (iris types)

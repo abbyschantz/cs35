@@ -1,11 +1,10 @@
 #titanic5.py
 
 #
-# read digits data
 #
 
-from sklearn.datasets import load_titanic
-titanic = load_titanic()
+#from sklearn.datasets import load_titanic
+#titanic = load_titanic()
 
 
 import numpy as np
@@ -13,6 +12,7 @@ from sklearn import cross_validation
 from sklearn import tree
 from sklearn import ensemble
 import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
 
 print("+++ Start of pandas' datahandling +++\n")
 # df here is a "dataframe":
@@ -36,9 +36,6 @@ df.info()
 # You can define a transformation function, to help out...
 def transform(s):
     """ from string to number
-          setosa -> 0
-          versicolor -> 1
-          virginica -> 2
     """
     d = { 'male':0, 'female':1 }
     return d[s]
@@ -49,29 +46,46 @@ def transform(s):
 #
 df['sex'] = df['sex'].map(transform)  # apply the function to the column
 
+df.head()
+df.info()
+
 print("\n+++ End of pandas +++\n")
 
 print("+++ Start of numpy/scikit-learn +++\n")
 
+
+
+# extract the underlying data with the values attribute:
+X_data = df.drop('age', axis=1).values        # everything except the 'survival' column
+y_data = df[ 'age' ].values      # also addressable by column name(s)
+
+
 # Data needs to be in numpy arrays - these next two lines convert to numpy arrays
 X_data_orig = df.iloc[:,0:14].values        # iloc == "integer locations" of rows/cols
-y_data_orig = df[ 'survived' ].values      # individually addressable columns (by name)
+y_data_orig = df[ 'age' ].values      # individually addressable columns (by name)
 
 ###############
 #feature_names = df.columns.values          # get the names into a list!
 #target_names = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9']   # and a list of the labels...
+
+#make list of ages for target_numbers
+age_list = []
+for number in range(0,100):
+	age_list.append(str(number))
+
+#add decinmal ages to the list of ages
+for age in y_data:
+	if age < 1:
+		age_list.append(str(age))
+
+
 feature_names = df.columns.values          # get the names into a list!
-target_names = ['0', '1']   # and a list of the labels...
+target_names = age_list   # and a list of the labels... (from age list)
+print (target_names)
 ###############
 
-X_data_full = X_data_orig[44:,:]  # make the 10 into 0 to keep all of the data
-y_data_full = y_data_orig[44:]    # same for this line
-
-
-#
-# cross-validation and scoring to determine parameters...
-# 
-
+X_data_full = X_data_orig[30:,:]  # make the 10 into 0 to keep all of the data
+y_data_full = y_data_orig[30:]    # same for this line
 #
 # we can scramble the data - but only if we know the test set's labels!
 # 
@@ -82,11 +96,11 @@ y_data_full = y_data_full[indices]
 #
 # The first ten will be our test set - the rest will be our training set
 #
-X_test = X_data_full[0:44,0:14]              # the final testing data
-X_train = X_data_full[44:,0:14]              # the training data
+X_test = X_data_full[0:30,0:14]              # the final testing data
+X_train = X_data_full[30:,0:14]              # the training data
 
-y_test = y_data_full[0:44]                  # the final testing outputs/labels (unknown)
-y_train = y_data_full[44:]                  # the training outputs/labels (known)
+y_test = y_data_full[0:30]                  # the final testing outputs/labels (unknown)
+y_train = y_data_full[30:]                  # the training outputs/labels (known)
 
 #
 # cross-validation to determine the Decision Tree's parameter (to find max_depth)
@@ -94,7 +108,6 @@ y_train = y_data_full[44:]                  # the training outputs/labels (known
 max_depth=4
 #
 
-test_score = []
 best_score = 0
 index = 0
 for i in range(1,11):
@@ -132,11 +145,11 @@ print("DT best score is ", best_score)
 # now, train the model with ALL of the training data...  and predict the labels of the test set
 #
 
-X_test = X_data_orig[0:2,0:14]              # the final testing data
-X_train = X_data_orig[2:,0:14]              # the training data
+X_test = X_data_orig[0:30,0:14]              # the final testing data
+X_train = X_data_orig[30:,0:14]              # the training data
 
-y_test = y_data_orig[0:2]                  # the final testing outputs/labels (unknown)
-y_train = y_data_orig[2:]                  # the training outputs/labels (known)
+y_test = y_data_orig[0:30]                  # the final testing outputs/labels (unknown)
+y_train = y_data_orig[30:]                  # the training outputs/labels (known)
 
 #
 # show the creation of three tree files (three max depths)
@@ -165,10 +178,10 @@ for max_depth in [1,2,3,4]:
 
 
 # here are some examples, printed out:
-print("iris_X_test's predicted outputs are")
+print("titanic_X_test's predicted outputs are")
 print(dtree.predict(X_test))
 
-# and here are the actual labels (iris types)
+# and here are the actual labels 
 print("and the actual labels are")
 print(y_test)
 
@@ -208,7 +221,7 @@ index = 0
 for i in range(1, 11):
     for j in range(1,11):
         score = 0
-        rforest = ensemble.RandomForestClassifier(max_depth=i, n_estimators=10)
+        rforest = ensemble.RandomForestRegressor(max_depth=i, n_estimators=10)
 
         #
         # split into our cross-validation sets...
@@ -246,11 +259,11 @@ rforest = ensemble.RandomForestClassifier(max_depth=max_depth, n_estimators=100)
 # now, train the model with ALL of the training data...  and predict the labels of the test set
 #
 
-X_test = X_data_orig[0:9,0:14]              # the final testing data
-X_train = X_data_orig[9:,0:14]              # the training data
+X_test = X_data_orig[0:30,0:14]              # the final testing data
+X_train = X_data_orig[30:,0:14]              # the training data
 
-y_test = y_data_orig[0:9]                  # the final testing outputs/labels (unknown)
-y_train = y_data_orig[9:]                  # the training outputs/labels (known)
+y_test = y_data_orig[0:30]                  # the final testing outputs/labels (unknown)
+y_train = y_data_orig[30:]                  # the training outputs/labels (known)
 
 # this next line is where the full training data is used for the model
 rforest = rforest.fit(X_train, y_train) 
@@ -263,17 +276,17 @@ print("feature importances:", rforest.feature_importances_)
 
 
 # here are some examples, printed out:
-print("iris_X_test's predicted outputs are")
+print("titanic_X_test's predicted outputs are")
 print(rforest.predict(X_test))
 
-# and here are the actual labels (iris types)
+# and here are the actual labels 
 print("and the actual labels are")
 print(y_test)
 
 
 
 #
-# Imputing example with iris data
+# Imputing example with titanic data
 #
 WANT_IMPUTING_EXAMPLE = False
 if WANT_IMPUTING_EXAMPLE == True:
