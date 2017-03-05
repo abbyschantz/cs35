@@ -12,7 +12,7 @@ from sklearn import cross_validation
 from sklearn import tree
 from sklearn import ensemble
 import pandas as pd
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsRegressor
 
 print("+++ Start of pandas' datahandling +++\n")
 # df here is a "dataframe":
@@ -23,7 +23,6 @@ df.info()                                 # column details
 df = df.drop('name', axis=1)  # axis = 1 means column
 df = df.drop('ticket', axis=1)
 df = df.drop('cabin', axis=1)
-df = df.drop('embarked', axis=1)
 df = df.drop('home.dest', axis=1)
 
 df = df.dropna()
@@ -34,18 +33,20 @@ df.info()
 # One important feature is the conversion from string to numeric datatypes!
 # As input features, numpy and scikit-learn need numeric datatypes
 # You can define a transformation function, to help out...
-def transform(s):
+def tr_mf(s):
     """ from string to number
     """
     d = { 'male':0, 'female':1 }
     return d[s]
 
-    
-# 
-# this applies the function transform to a whole column
-#
-df['sex'] = df['sex'].map(transform)  # apply the function to the column
+df['sex'] = df['sex'].map(tr_mf)  # apply the function to the column
 
+
+def tr_embark(s):
+	d = {'S': 0, 'C': 1, 'Q': 2}
+	return d[s]
+df['embarked'] = df['embarked'].map(tr_embark)
+# let's see our dataframe again...
 df.head()
 df.info()
 
@@ -61,7 +62,7 @@ y_data = df[ 'age' ].values      # also addressable by column name(s)
 
 
 # Data needs to be in numpy arrays - these next two lines convert to numpy arrays
-X_data_orig = df.iloc[:,0:14].values        # iloc == "integer locations" of rows/cols
+X_data_orig = df.iloc[:,0:7].values        # iloc == "integer locations" of rows/cols
 y_data_orig = df[ 'age' ].values      # individually addressable columns (by name)
 
 ###############
@@ -74,18 +75,19 @@ for number in range(0,100):
 	age_list.append(str(number))
 
 #add decinmal ages to the list of ages
-for age in y_data:
-	if age < 1:
-		age_list.append(str(age))
+#for age in y_data:
+#	if age < 1:
+#		age_list.append(str(age))
 
 
 feature_names = df.columns.values          # get the names into a list!
 target_names = age_list   # and a list of the labels... (from age list)
 print (target_names)
-###############
 
-X_data_full = X_data_orig[30:,:]  # make the 10 into 0 to keep all of the data
-y_data_full = y_data_orig[30:]    # same for this line
+################################################
+
+X_data_full = X_data_orig[0:,:]  # make the 10 into 0 to keep all of the data
+y_data_full = y_data_orig[0:]    # same for this line
 #
 # we can scramble the data - but only if we know the test set's labels!
 # 
@@ -96,8 +98,8 @@ y_data_full = y_data_full[indices]
 #
 # The first ten will be our test set - the rest will be our training set
 #
-X_test = X_data_full[0:30,0:14]              # the final testing data
-X_train = X_data_full[30:,0:14]              # the training data
+X_test = X_data_full[0:30,0:7]              # the final testing data
+X_train = X_data_full[30:,0:7]              # the training data
 
 y_test = y_data_full[0:30]                  # the final testing outputs/labels (unknown)
 y_train = y_data_full[30:]                  # the training outputs/labels (known)
@@ -112,7 +114,7 @@ best_score = 0
 index = 0
 for i in range(1,11):
     score = 0
-    dtree = tree.DecisionTreeClassifier(max_depth=i)
+    dtree = tree.DecisionTreeRegressor(max_depth=i)
     for j in range(1,11):  # run at least 10 times.... take the average cv testing score
         #
         # split into our cross-validation sets...
@@ -145,8 +147,8 @@ print("DT best score is ", best_score)
 # now, train the model with ALL of the training data...  and predict the labels of the test set
 #
 
-X_test = X_data_orig[0:30,0:14]              # the final testing data
-X_train = X_data_orig[30:,0:14]              # the training data
+X_test = X_data_orig[0:30,0:7]              # the final testing data
+X_train = X_data_orig[30:,0:7]              # the training data
 
 y_test = y_data_orig[0:30]                  # the final testing outputs/labels (unknown)
 y_train = y_data_orig[30:]                  # the training outputs/labels (known)
@@ -159,12 +161,12 @@ for max_depth in [1,2,3,4]:
     #
     # we'll use max_depth between 1 and 3
     #
-    dtree = tree.DecisionTreeClassifier(max_depth=max_depth)
+    dtree = tree.DecisionTreeRegressor(max_depth=max_depth)
 
 
     # this next line is where the full training data is used for the model
     dtree = dtree.fit(X_data_full, y_data_full) 
-    print("\nCreated and trained a knn classifier")  #, knn
+    print("\nCreated and trained a knn Regressor")  #, knn
 
 
     #
@@ -202,8 +204,8 @@ print(y_test)
 #
 # The first ten will be our test set - the rest will be our training set
 #
-X_test = X_data_full[0:10,0:63]              # the final testing data
-X_train = X_data_full[10:,0:63]              # the training data
+X_test = X_data_full[0:10,0:7]              # the final testing data
+X_train = X_data_full[10:,0:7]              # the training data
 
 y_test = y_data_full[0:10]                  # the final testing outputs/labels (unknown)
 y_train = y_data_full[10:]                  # the training outputs/labels (known)
@@ -252,22 +254,22 @@ print("randomForest best score", best_score)
 # we'll use max_depth == 2
 #
 max_depth = 2
-rforest = ensemble.RandomForestClassifier(max_depth=max_depth, n_estimators=100)
+rforest = ensemble.RandomForestRegressor(max_depth=max_depth, n_estimators=100)
 
 
 #
 # now, train the model with ALL of the training data...  and predict the labels of the test set
 #
 
-X_test = X_data_orig[0:30,0:14]              # the final testing data
-X_train = X_data_orig[30:,0:14]              # the training data
+X_test = X_data_orig[0:30,0:7]              # the final testing data
+X_train = X_data_orig[30:,0:7]              # the training data
 
 y_test = y_data_orig[0:30]                  # the final testing outputs/labels (unknown)
 y_train = y_data_orig[30:]                  # the training outputs/labels (known)
 
 # this next line is where the full training data is used for the model
 rforest = rforest.fit(X_train, y_train) 
-print("\nCreated and trained a knn classifier")  #, knn
+print("\nCreated and trained a knn Regressor")  #, knn
 
 #
 # feature importances

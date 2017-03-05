@@ -45,6 +45,7 @@ X_data_orig = df.iloc[:,0:63].values        # iloc == "integer locations" of row
 y_data_orig = df[ '64' ].values      # individually addressable columns (by name)
 feature_names = df.columns.values          # get the names into a list!
 target_names = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9']   # and a list of the labels...
+print ("target names are,", target_names)
 
 
 X_data_full = X_data_orig[0:,:]  # make the 10 into 0 to keep all of the data
