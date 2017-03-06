@@ -12,7 +12,6 @@ from sklearn import cross_validation
 from sklearn import tree
 from sklearn import ensemble
 import pandas as pd
-from sklearn.neighbors import KNeighborsRegressor
 
 print("+++ Start of pandas' datahandling +++\n")
 # df here is a "dataframe":
@@ -57,8 +56,8 @@ print("+++ Start of numpy/scikit-learn +++\n")
 
 
 # extract the underlying data with the values attribute:
-X_data = df.drop('age', axis=1).values        # everything except the 'survival' column
-y_data = df[ 'age' ].values      # also addressable by column name(s)
+X_data = df.drop('survived', axis=1).values        # everything except the 'survival' column
+y_data = df[ 'survived' ].values      # also addressable by column name(s)
 
 
 # Data needs to be in numpy arrays - these next two lines convert to numpy arrays
@@ -66,13 +65,13 @@ X_data_orig = df.iloc[:,0:7].values        # iloc == "integer locations" of rows
 y_data_orig = df[ 'age' ].values      # individually addressable columns (by name)
 
 ###############
-#feature_names = df.columns.values          # get the names into a list!
-#target_names = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9']   # and a list of the labels...
+feature_names = df.columns.values          # get the names into a list!
+target_names = ['0','1']   # and a list of the labels...
 
 #make list of ages for target_numbers
-age_list = []
-for number in range(0,100):
-	age_list.append(str(number))
+#age_list = []
+#for number in range(0,100):
+	#age_list.append(str(number))
 
 #add decinmal ages to the list of ages
 #for age in y_data:
