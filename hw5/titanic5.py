@@ -140,7 +140,7 @@ for i in range(len(feature_names)):
 
 
 target_names = ['0','1'] 
-tree.export_graphviz(dtree, out_file='tree' + str(max_depth) + '.dot',   # constructed filename!
+tree.export_graphviz(dtree, out_file='titanic_tree' + str(max_depth) + '.dot',   # constructed filename!
                             feature_names=feature_names2,  filled=True, rotate=False, # LR vs UD
                             class_names=target_names, leaves_parallel=True) 
 
@@ -325,24 +325,29 @@ print(y_test, "\n")
 
 
 """
-
-DT
-The best DT score was  0.80320855615 with a depth of  5
-DT score was  0.823529411765
-Feature importances: [ 0.17868417  0.6012075   0.14193312  0.07305896  0.00511626]
+Our DT results:
+The best DT score was  0.802139037433 with a depth of  4
+DT score was  0.818181818182
+Feature importances: [ 0.19004027  0.61164342  0.12895005  0.06936626  0.        ]
 Predicted outputs:
-[0 1 0 0 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 0 1 0 0 0 1 1 0 1 1 1
+[1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 1 0 1 0 0 0
  0 0 0 0 0]
 and the actual outcomes are:
-[1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 1 0 1 0 1 0 0 1 0 0 0 0 0 1 1
- 0 0 0 0 1] 
+[1 1 1 1 0 0 0 0 0 1 1 0 0 0 0 0 0 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 0 0 0 1 0
+ 0 1 0 0 0]
 
- RT
-The best DT score was  0.806417112299 with a depth of  4
-RT test score: 0.807486631016
-RT feature importances: [ 0.21270386  0.55566693  0.11488716  0.05587033  0.06087171]
+
+Our RT results:
+The best RT score was  0.810695187166 with a depth of  4
+RT test score: 0.83422459893
+RT feature importances: [ 0.2064859   0.56451728  0.1141947   0.05270007  0.062102
+05]
 The predicted outputs are
-[0 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 0 1 0 0 0 1 1 0 1 1 1
- 0 0 0 0 0] 
+[0 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 1 1 0 1 0 1 0 0
+ 0 1 1 0 0]
+
+and the actual labels are
+[0 1 0 0 0 1 0 0 0 0 1 0 1 0 1 0 1 1 1 1 0 0 0 0 0 0 0 1 0 1 1 1 1 0 1 1 0
+ 0 1 1 0 0]
 
 """
