@@ -337,8 +337,8 @@ and the actual outcomes are:
 [1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 1 0 1 0 1 0 0 1 0 0 0 0 0 1 1
  0 0 0 0 1] 
 
-RT
-The best RT score was  0.806417112299 with a depth of  4
+ RT
+The best DT score was  0.806417112299 with a depth of  4
 RT test score: 0.807486631016
 RT feature importances: [ 0.21270386  0.55566693  0.11488716  0.05587033  0.06087171]
 The predicted outputs are
