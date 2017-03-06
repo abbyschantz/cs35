@@ -1,16 +1,25 @@
 digraph Tree {
 node [shape=box, style="filled", color="black"] ;
 graph [ranksep=equally, splines=polyline] ;
-0 [label="Hue <= 0.5\nmse = 0.5144\nsamples = 178\nvalue = 0.2303", fillcolor="#e581399d"] ;
-1 [label="Hue <= -0.5\nmse = 0.2018\nsamples = 107\nvalue = -0.2804", fillcolor="#e581395c"] ;
+0 [label="Hue <= -0.225\nmse = 0.5824\nsamples = 178\nvalue = 0.6323", fillcolor="#e58139b7"] ;
+1 [label="mse = 0.0\nsamples = 30\nvalue = -1.0", fillcolor="#e5813900"] ;
 0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
-2 [label="mse = 0.0\nsamples = 30\nvalue = -1.0", fillcolor="#e5813900"] ;
-1 -> 2 ;
-3 [label="mse = 0.0\nsamples = 77\nvalue = 0.0", fillcolor="#e5813980"] ;
-1 -> 3 ;
-4 [label="mse = 0.0\nsamples = 71\nvalue = 1.0", fillcolor="#e58139ff"] ;
-0 -> 4 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+2 [label="Hue <= 0.945\nmse = 0.0509\nsamples = 148\nvalue = 0.9632", fillcolor="#e58139dc"] ;
+0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+3 [label="Hue <= 0.745\nmse = 0.0161\nsamples = 66\nvalue = 0.7574", fillcolor="#e58139c5"] ;
+2 -> 3 ;
+4 [label="mse = 0.0036\nsamples = 29\nvalue = 0.631", fillcolor="#e58139b7"] ;
+3 -> 4 ;
+5 [label="mse = 0.0036\nsamples = 37\nvalue = 0.8565", fillcolor="#e58139d0"] ;
+3 -> 5 ;
+6 [label="Hue <= 1.165\nmse = 0.0174\nsamples = 82\nvalue = 1.1288", fillcolor="#e58139ee"] ;
+2 -> 6 ;
+7 [label="mse = 0.0036\nsamples = 55\nvalue = 1.0553", fillcolor="#e58139e6"] ;
+6 -> 7 ;
+8 [label="mse = 0.0119\nsamples = 27\nvalue = 1.2785", fillcolor="#e58139ff"] ;
+6 -> 8 ;
 {rank=same ; 0} ;
-{rank=same ; 1} ;
-{rank=same ; 2; 3; 4} ;
+{rank=same ; 2} ;
+{rank=same ; 3; 6} ;
+{rank=same ; 1; 4; 5; 7; 8} ;
 }

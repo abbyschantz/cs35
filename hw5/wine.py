@@ -14,27 +14,6 @@ df = pd.read_csv('wine.csv', header=0)    # read the file w/header row #0
 df.head()                                 # first five lines
 df.info()                                 # column details
 
-#replace all NaN ages with -1
-df['Hue'].fillna(-1, inplace=True)
-df = df.sort('Hue', ascending=True)
-df['Hue'] = df['Hue'].astype(int)
-# One important feature is the conversion from string to numeric datatypes!
-# As input features, numpy and scikit-learn need numeric datatypes
-# You can define a transformation function, to help out...
-#def transform(s):
-#    """ from string to number
-#          setosa -> 0
-#          versicolor -> 1
-#          virginica -> 2
-#    """
-#   d = { 'unknown':-1, 'setosa':0, 'versicolor':1, 'virginica':2 }
-#   return d[s]
-    
-# 
-# this applies the function transform to a whole column
-#
-#df['irisname'] = df['irisname'].map(transform)  # apply the function to the column
-
 print("\n+++ End of pandas +++\n")
 
 print("+++ Start of numpy/scikit-learn +++\n")
@@ -54,10 +33,12 @@ y_data_full = y_data_orig[0:]    # same for this line
 targetsList = []
 for hue in y_data_full:
     if not hue in targetsList:
+        if hue == -1:
+            continue
         targetsList.append(str(hue))
 
 target_names = targetsList   # and a list of the labels...
-
+print("target_name", target_names)
 #
 # cross-validation and scoring to determine parameters...
 # 
