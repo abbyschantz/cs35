@@ -1,0 +1,37 @@
+digraph Tree {
+node [shape=box, style="filled", color="black"] ;
+graph [ranksep=equally, splines=polyline] ;
+0 [label="sex <= 0.5\ngini = 0.4762\nsamples = 747\nvalue = [455, 292]\nclass = 0", fillcolor="#e581395b"] ;
+1 [label="age <= 9.5\ngini = 0.3103\nsamples = 474\nvalue = [383, 91]\nclass = 0", fillcolor="#e58139c2"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="sibsp <= 2.5\ngini = 0.4851\nsamples = 29\nvalue = [12, 17]\nclass = 1", fillcolor="#399de54b"] ;
+1 -> 2 ;
+3 [label="gini = 0.2659\nsamples = 19\nvalue = [3, 16]\nclass = 1", fillcolor="#399de5cf"] ;
+2 -> 3 ;
+4 [label="gini = 0.18\nsamples = 10\nvalue = [9, 1]\nclass = 0", fillcolor="#e58139e3"] ;
+2 -> 4 ;
+5 [label="pclass <= 1.5\ngini = 0.2773\nsamples = 445\nvalue = [371, 74]\nclass = 0", fillcolor="#e58139cc"] ;
+1 -> 5 ;
+6 [label="gini = 0.4286\nsamples = 90\nvalue = [62, 28]\nclass = 0", fillcolor="#e581398c"] ;
+5 -> 6 ;
+7 [label="gini = 0.2256\nsamples = 355\nvalue = [309, 46]\nclass = 0", fillcolor="#e58139d9"] ;
+5 -> 7 ;
+8 [label="pclass <= 2.5\ngini = 0.3884\nsamples = 273\nvalue = [72, 201]\nclass = 1", fillcolor="#399de5a4"] ;
+0 -> 8 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+9 [label="parch <= 0.5\ngini = 0.1158\nsamples = 162\nvalue = [10, 152]\nclass = 1", fillcolor="#399de5ee"] ;
+8 -> 9 ;
+10 [label="gini = 0.1715\nsamples = 95\nvalue = [9, 86]\nclass = 1", fillcolor="#399de5e4"] ;
+9 -> 10 ;
+11 [label="gini = 0.0294\nsamples = 67\nvalue = [1, 66]\nclass = 1", fillcolor="#399de5fb"] ;
+9 -> 11 ;
+12 [label="sibsp <= 1.5\ngini = 0.4931\nsamples = 111\nvalue = [62, 49]\nclass = 0", fillcolor="#e5813935"] ;
+8 -> 12 ;
+13 [label="gini = 0.4992\nsamples = 98\nvalue = [51, 47]\nclass = 0", fillcolor="#e5813914"] ;
+12 -> 13 ;
+14 [label="gini = 0.2604\nsamples = 13\nvalue = [11, 2]\nclass = 0", fillcolor="#e58139d1"] ;
+12 -> 14 ;
+{rank=same ; 0} ;
+{rank=same ; 1; 8} ;
+{rank=same ; 2; 5; 9; 12} ;
+{rank=same ; 3; 4; 6; 7; 10; 11; 13; 14} ;
+}
