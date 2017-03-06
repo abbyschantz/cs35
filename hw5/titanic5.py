@@ -1,7 +1,7 @@
 #
 #
 # titanic5.py
-#
+# GITHUB REPO: https://github.com/abbyschantz/cs35/tree/master/hw5
 #
 
 import numpy as np

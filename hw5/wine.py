@@ -1,5 +1,5 @@
 #
-# read iris data
+# GITHUB REPO: https://github.com/abbyschantz/cs35/tree/master/hw5
 #
 
 import numpy as np
@@ -18,13 +18,14 @@ print("\n+++ End of pandas +++\n")
 
 print("+++ Start of numpy/scikit-learn +++\n")
 
+X_data = df.drop('Hue', axis=1).values        # everything except the 'hue' column
+y_data = df[ 'Hue' ].values      # also addressable by column name(s)
+
 # Data needs to be in numpy arrays - these next two lines convert to numpy arrays
 X_data_orig = df.iloc[:,0:13].values        # iloc == "integer locations" of rows/cols
 y_data_orig = df[ 'Hue' ].values      # individually addressable columns (by name)
 feature_names = df.columns.values          # get the names into a list!
 
-X_data = df.drop('Hue', axis=1).values        # everything except the 'hue' column
-y_data = df[ 'Hue' ].values      # also addressable by column name(s)
 
 X_data_full = X_data_orig[0:,:]  # make the 10 into 0 to keep all of the data
 y_data_full = y_data_orig[0:]    # same for this line
@@ -37,7 +38,7 @@ for hue in y_data_full:
             continue
         targetsList.append(str(hue))
 
-target_names = targetsList   # and a list of the labels...
+target_names = ['targetsList']   # and a list of the labels...
 print("target_name", target_names)
 #
 # cross-validation and scoring to determine parameters...
