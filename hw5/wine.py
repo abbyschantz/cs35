@@ -27,8 +27,8 @@ df['Hue'] = df['Hue'].astype(int)
 #          versicolor -> 1
 #          virginica -> 2
 #    """
- #   d = { 'unknown':-1, 'setosa':0, 'versicolor':1, 'virginica':2 }
- #   return d[s]
+#   d = { 'unknown':-1, 'setosa':0, 'versicolor':1, 'virginica':2 }
+#   return d[s]
     
 # 
 # this applies the function transform to a whole column
@@ -72,32 +72,44 @@ y_data_full = y_data_full[indices]
 #
 # The first ten will be our test set - the rest will be our training set
 #
-X_test = X_data_full[0:30,0:13]              # the final testing data
-X_train = X_data_full[30:,0:13]              # the training data
+X_test = X_data_full[0:10,0:13]              # the final testing data
+X_train = X_data_full[10:,0:13]              # the training data
 
-y_test = y_data_full[0:30]                  # the final testing outputs/labels (unknown)
-y_train = y_data_full[30:]                  # the training outputs/labels (known)
+y_test = y_data_full[0:10]                  # the final testing outputs/labels (unknown)
+y_train = y_data_full[10:]                  # the training outputs/labels (known)
 
 #
 # cross-validation to determine the Decision Tree's parameter (to find max_depth)
 #
-max_depth=1
+
+max_depth=4
 #
-dtree = tree.DecisionTreeRegressor(max_depth=max_depth)
+best_score = 0
+index = 0
+for i in range(1,11):
+    score = 0
+    dtree = tree.DecisionTreeRegressor(max_depth=i)
 
-for i in range(1, 11):  # run at least 10 times.... take the average cv testing score
-    #
-    # split into our cross-validation sets...
-    #
-    cv_data_train, cv_data_test, cv_target_train, cv_target_test = \
-        cross_validation.train_test_split(X_train, y_train, test_size=0.2) # random_state=0 
+    for j in range(1, 11):  # run at least 10 times.... take the average cv testing score
+        #
+        # split into our cross-validation sets...
+        #
+        cv_data_train, cv_data_test, cv_target_train, cv_target_test = \
+            cross_validation.train_test_split(X_train, y_train, test_size=0.2) # random_state=0 
 
-    # fit the model using the cross-validation data
-    #   typically cross-validation is used to get a sense of how well it works
-    #   and tune any parameters, such as the k in kNN (3? 5? 7? 41?, etc.)
-    dtree = dtree.fit(cv_data_train, cv_target_train) 
-    print("CV training-data score:", dtree.score(cv_data_train,cv_target_train))
-    print("CV testing-data score:", dtree.score(cv_data_test,cv_target_test))
+        # fit the model using the cross-validation data
+        #   typically cross-validation is used to get a sense of how well it works
+        #   and tune any parameters, such as the k in kNN (3? 5? 7? 41?, etc.)
+        dtree = dtree.fit(cv_data_train, cv_target_train) 
+        #print("CV training-data score:", dtree.score(cv_data_train,cv_target_train))
+        #print("CV testing-data score:", dtree.score(cv_data_test,cv_target_test))
+        score += dtree.score(cv_data_test,cv_target_test)
+    average_score = score/10
+    print(i, average_score)
+    if average_score > best_score:
+        best_score = average_score
+        index = i
+print("DT best score is ", best_score)
 
 
 
@@ -117,6 +129,7 @@ y_train = y_data_orig[9:]                  # the training outputs/labels (known)
 #
 # show the creation of three tree files (three max depths)
 #
+best = 0
 for max_depth in [1,2,3,4]:
     #
     # we'll use max_depth between 1 and 3
@@ -137,7 +150,7 @@ for max_depth in [1,2,3,4]:
 
 
 # here are some examples, printed out:
-print("iris_X_test's predicted outputs are")
+print("wine_X_test's predicted outputs are")
 print(dtree.predict(X_test))
 
 # and here are the actual labels (iris types)
@@ -161,36 +174,48 @@ print(y_test)
 #
 # The first ten will be our test set - the rest will be our training set
 #
-X_test = X_data_full[0:30,0:13]              # the final testing data
-X_train = X_data_full[30:,0:13]              # the training data
+X_test = X_data_full[0:10,0:13]              # the final testing data
+X_train = X_data_full[10:,0:13]              # the training data
 
-y_test = y_data_full[0:30]                  # the final testing outputs/labels (unknown)
-y_train = y_data_full[30:]                  # the training outputs/labels (known)
+y_test = y_data_full[0:10]                  # the final testing outputs/labels (unknown)
+y_train = y_data_full[10:]                  # the training outputs/labels (known)
 
 
 #
 # cross-validation to determine the Random Forest's parameters (max_depth and n_estimators)
 #
 #
-rforest = ensemble.RandomForestRegressor(max_depth=max_depth, n_estimators=10)
 
 
 # adapt for cross-validation (at least 10 runs w/ average test-score)
-for i in range(10):
-    #
-    # split into our cross-validation sets...
-    #
-    cv_data_train, cv_data_test, cv_target_train, cv_target_test = \
-        cross_validation.train_test_split(X_train, y_train, test_size=0.2) # random_state=0 
+best_score = 0
+index = 0
+for i in range(1, 11):
+    for j in range(1,11):
+        score = 0
+        rforest = ensemble.RandomForestRegressor(max_depth=i, n_estimators=10)
 
-    # fit the model using the cross-validation data
-    #   typically cross-validation is used to get a sense of how well it works
-    #   and tune any parameters, such as the k in kNN (3? 5? 7? 41?, etc.)
-    rforest = rforest.fit(cv_data_train, cv_target_train) 
-    print("CV training-data score:", dtree.score(cv_data_train,cv_target_train))
-    print("CV testing-data score:", dtree.score(cv_data_test,cv_target_test))
+        #
+        # split into our cross-validation sets...
+        #
+        cv_data_train, cv_data_test, cv_target_train, cv_target_test = \
+            cross_validation.train_test_split(X_train, y_train, test_size=0.2) # random_state=0 
 
-# rforest.estimators_  [a list of dtrees!]
+        # fit the model using the cross-validation data
+        #   typically cross-validation is used to get a sense of how well it works
+        #   and tune any parameters, such as the k in kNN (3? 5? 7? 41?, etc.)
+        rforest = rforest.fit(cv_data_train, cv_target_train) 
+        #print("CV training-data score:", dtree.score(cv_data_train,cv_target_train))
+        #print("CV testing-data score:", dtree.score(cv_data_test,cv_target_test))
+        score += dtree.score(cv_data_test,cv_target_test)
+    average_score = score/10
+    print(i, average_score)
+    if average_score > best_score:
+        best_score = average_score
+        index = i
+print("randomForest best score", best_score)
+
+    # rforest.estimators_  [a list of dtrees!]
 
 
 #
@@ -221,7 +246,7 @@ print("feature importances:", rforest.feature_importances_)
 
 
 # here are some examples, printed out:
-print("iris_X_test's predicted outputs are")
+print("wine_X_test's predicted outputs are")
 print(rforest.predict(X_test))
 
 # and here are the actual labels (iris types)
