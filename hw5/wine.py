@@ -21,9 +21,12 @@ print("+++ Start of numpy/scikit-learn +++\n")
 X_data = df.drop('Hue', axis=1).values        # everything except the 'hue' column
 y_data = df[ 'Hue' ].values      # also addressable by column name(s)
 
+X_data_orig = X_data[:,:]
+y_data_orig = y_data[:]
+
 # Data needs to be in numpy arrays - these next two lines convert to numpy arrays
-X_data_orig = df.iloc[:,0:13].values        # iloc == "integer locations" of rows/cols
-y_data_orig = df[ 'Hue' ].values      # individually addressable columns (by name)
+#X_data_orig = df.iloc[:,0:13].values        # iloc == "integer locations" of rows/cols
+#y_data_orig = df[ 'Hue' ].values      # individually addressable columns (by name)
 feature_names = df.columns.values          # get the names into a list!
 
 
@@ -47,18 +50,18 @@ print("target_name", target_names)
 #
 # we can scramble the data - but only if we know the test set's labels!
 # 
-indices = np.random.permutation(len(X_data_full))  # this scrambles the data each time
-X_data_full = X_data_full[indices]
-y_data_full = y_data_full[indices]
+# indices = np.random.permutation(len(X_data_full))  # this scrambles the data each time
+# X_data_full = X_data_full[indices]
+# y_data_full = y_data_full[indices]
 
 #
 # The first ten will be our test set - the rest will be our training set
 #
-X_test = X_data_full[0:10,0:13]              # the final testing data
-X_train = X_data_full[10:,0:13]              # the training data
+X_test = X_data_full[0:30,:]              # the final testing data
+X_train = X_data_full[30:,:]              # the training data
 
-y_test = y_data_full[0:10]                  # the final testing outputs/labels (unknown)
-y_train = y_data_full[10:]                  # the training outputs/labels (known)
+y_test = y_data_full[0:30]                  # the final testing outputs/labels (unknown)
+y_train = y_data_full[30:]                  # the training outputs/labels (known)
 
 #
 # cross-validation to determine the Decision Tree's parameter (to find max_depth)
@@ -102,34 +105,37 @@ print("DT best score is ", best_score)
 # now, train the model with ALL of the training data...  and predict the labels of the test set
 #
 
-X_test = X_data_orig[0:9,0:13]              # the final testing data
-X_train = X_data_orig[9:,0:13]              # the training data
+X_test = X_data_orig[0:30,0:]              # the final testing data
+X_train = X_data_orig[30:,:]              # the training data
 
-y_test = y_data_orig[0:9]                  # the final testing outputs/labels (unknown)
-y_train = y_data_orig[9:]                  # the training outputs/labels (known)
+y_test = y_data_orig[0:30]                  # the final testing outputs/labels (unknown)
+y_train = y_data_orig[30:]                  # the training outputs/labels (known)
 
 #
 # show the creation of three tree files (three max depths)
 #
-best = 0
-for max_depth in [1,2,3,4]:
-    #
-    # we'll use max_depth between 1 and 3
-    #
-    dtree = tree.DecisionTreeRegressor(max_depth=max_depth)
+# best = 0
+# for max_depth in [1,2,3,4]:
+#     #
+#     # we'll use max_depth between 1 and 3
+#     #
+#     dtree = tree.DecisionTreeRegressor(max_depth=max_depth)
 
-    # this next line is where the full training data is used for the model
-    dtree = dtree.fit(X_data_full, y_data_full) 
-    print("\nCreated and trained a knn classifier")  #, knn
+#     # this next line is where the full training data is used for the model
+#     dtree = dtree.fit(X_data_full, y_data_full) 
+#     print("\nCreated and trained a knn classifier")  #, knn
 
+#     #
+#     # write out the dtree to tree.dot (or another filename of your choosing...)
+#     tree.export_graphviz(dtree, out_file='tree' + str(max_depth) + '.dot',   # constructed filename!
+#                             feature_names=feature_names,  filled=True, rotate=False, # LR vs UD
+#                             class_names=target_names, leaves_parallel=True)  
+#     # the website to visualize the resulting graph (the tree) is at www.webgraphviz.com
     #
-    # write out the dtree to tree.dot (or another filename of your choosing...)
-    tree.export_graphviz(dtree, out_file='tree' + str(max_depth) + '.dot',   # constructed filename!
-                            feature_names=feature_names,  filled=True, rotate=False, # LR vs UD
-                            class_names=target_names, leaves_parallel=True)  
-    # the website to visualize the resulting graph (the tree) is at www.webgraphviz.com
-    #
+dtree = tree.DecisionTreeRegressor(max_depth=5)
 
+# this next line is where the full training data is used for the model
+dtree = dtree.fit(X_train, y_train) 
 
 # here are some examples, printed out:
 print("wine_X_test's predicted outputs are")
@@ -156,11 +162,11 @@ print(y_test)
 #
 # The first ten will be our test set - the rest will be our training set
 #
-X_test = X_data_full[0:10,0:13]              # the final testing data
-X_train = X_data_full[10:,0:13]              # the training data
+X_test = X_data_full[0:30,:]              # the final testing data
+X_train = X_data_full[30:,:] 
 
-y_test = y_data_full[0:10]                  # the final testing outputs/labels (unknown)
-y_train = y_data_full[10:]                  # the training outputs/labels (known)
+y_test = y_data_full[0:30]                  # the final testing outputs/labels (unknown)
+y_train = y_data_full[30:]                  # the training outputs/labels (known)
 
 
 #
@@ -169,13 +175,14 @@ y_train = y_data_full[10:]                  # the training outputs/labels (known
 #
 
 
+
 # adapt for cross-validation (at least 10 runs w/ average test-score)
 best_score = 0
 index = 0
 for i in range(1, 11):
+    score = 0
+    rforest = ensemble.RandomForestRegressor(max_depth=i, n_estimators=100)
     for j in range(1,11):
-        score = 0
-        rforest = ensemble.RandomForestRegressor(max_depth=i, n_estimators=10)
 
         #
         # split into our cross-validation sets...
@@ -189,7 +196,7 @@ for i in range(1, 11):
         rforest = rforest.fit(cv_data_train, cv_target_train) 
         #print("CV training-data score:", dtree.score(cv_data_train,cv_target_train))
         #print("CV testing-data score:", dtree.score(cv_data_test,cv_target_test))
-        score += dtree.score(cv_data_test,cv_target_test)
+        score += rforest.score(cv_data_test,cv_target_test)
     average_score = score/10
     print(i, average_score)
     if average_score > best_score:
@@ -211,11 +218,11 @@ rforest = ensemble.RandomForestRegressor(max_depth=max_depth, n_estimators=100)
 # now, train the model with ALL of the training data...  and predict the labels of the test set
 #
 
-X_test = X_data_orig[0:9,0:13]              # the final testing data
-X_train = X_data_orig[9:,0:13]              # the training data
+X_test = X_data_full[0:30,:]              # the final testing data
+X_train = X_data_full[30:,:] 
 
-y_test = y_data_orig[0:9]                  # the final testing outputs/labels (unknown)
-y_train = y_data_orig[9:]                  # the training outputs/labels (known)
+y_test = y_data_orig[0:30]                  # the final testing outputs/labels (unknown)
+y_train = y_data_orig[30:]                  # the training outputs/labels (known)
 
 # this next line is where the full training data is used for the model
 rforest = rforest.fit(X_train, y_train) 
