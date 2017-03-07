@@ -183,7 +183,7 @@ for n in range(1,max_depth+1):
         best_score = avg_score
         depth = n
 
-print("The best RT score was ", best_score, "with a depth of ", depth)
+print("The best RF score was ", best_score, "with a depth of ", depth)
 
 
 
@@ -199,8 +199,8 @@ rforest = ensemble.RandomForestClassifier(max_depth=max_depth, n_estimators=1000
 
 rforest = rforest.fit(X_train, y_train) 
 score = rforest.score(cv_data_test,cv_target_test)
-print("RT test score:", score)
-print("RT feature importances:", rforest.feature_importances_) 
+print("RF test score:", score)
+print("RF feature importances:", rforest.feature_importances_) 
 
 print("The predicted outputs are")
 print(rforest.predict(X_test),"\n")
@@ -325,6 +325,8 @@ print(y_test, "\n")
 
 
 """
+The model that predicted the best was randomForest! 
+
 Our DT results:
 The best DT score was  0.802139037433 with a depth of  4
 DT score was  0.818181818182
@@ -337,10 +339,10 @@ and the actual outcomes are:
  0 1 0 0 0]
 
 
-Our RT results:
-The best RT score was  0.810695187166 with a depth of  4
-RT test score: 0.83422459893
-RT feature importances: [ 0.2064859   0.56451728  0.1141947   0.05270007  0.062102
+Our RF results:
+The best RF score was  0.810695187166 with a depth of  4
+RF test score: 0.83422459893
+RF feature importances: [ 0.2064859   0.56451728  0.1141947   0.05270007  0.062102
 05]
 The predicted outputs are
 [0 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 1 1 0 1 0 1 0 0
