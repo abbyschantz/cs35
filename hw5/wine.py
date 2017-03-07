@@ -289,5 +289,189 @@ if WANT_IMPUTING_EXAMPLE == True:
 
 
 
+####################################### Extra Credit ########################################
+
+
+import numpy as np
+from sklearn import cross_validation
+import pandas as pd
+
+# For Pandas's read_csv, use header=0 when you know row 0 is a header row
+# df here is a "dataframe":
+df = pd.read_csv('wine_missing.csv', header=0)
+df.head()
+df.info()
+
+
+# import sys
+# sys.exit(0)
+
+print("+++ Start of numpy/scikit-learn +++")
+
+# extract the underlying data with the values attribute:
+X_data = df.drop('Hue', axis=1).values        # everything except the 'survival' column
+y_data = df[ 'Hue' ].values      # also addressable by column name(s)
+
+# We'll stick with numpy - here's the conversion to a numpy array
+X_data_full = df.iloc[:,0:13].values        # iloc == "integer locations" of rows/cols
+y_data_full = df[ 'Hue' ].values      # also addressable by column name(s)
+
+
+# we can drop the initial (unknown) rows -- if we want to test with known data
+X_data_full = X_data_full[30:,:]   # 2d array
+y_data_full = y_data_full[30:]     # 1d column
+
+
+# we can scramble the remaining data if we want - only if we know the test set's labels 
+indices = np.random.permutation(len(X_data_full))  # this scrambles the data each time
+X_data_full = X_data_full[indices]
+y_data_full = y_data_full[indices]
+
+# The first nine are our test set - the rest are our training
+X_test = X_data_full[0:30,0:13]              # the final testing data
+X_train = X_data_full[30:,0:13]              # the training data
+
+y_test = y_data_full[0:30]                  # the final testing outputs/labels (unknown)
+y_train = y_data_full[30:]                  # the training outputs/labels (known)
+
+
+
+#
+# feature display - use %matplotlib to make this work smoothly
+#
+from matplotlib import pyplot as plt
+
+#
+# feature engineering...
+#
+
+# here is where you can re-scale/change column values...
+# X_data[:,0] *= 100   # maybe the first column is worth 100x more!
+# X_data[:,3] *= 100   # maybe the fourth column is worth 100x more!
+
+
+#
+# here, you'll implement the kNN model and cross validation
+#
+from sklearn.neighbors import KNeighborsRegressor
+
+test_list = []
+best_score = 0
+index = 0
+
+for i in range(1,11):
+    score = 0
+    knn = KNeighborsRegressor(n_neighbors=i)   # i is the "k" in kNN
+
+    for j in range(1,11):
+        # cross-validate (use part of the training data for training - and part for testing)
+        #   first, create cross-validation data (here 3/4 train and 1/4 test)
+        cv_data_train, cv_data_test, cv_target_train, cv_target_test = \
+        cross_validation.train_test_split(X_train, y_train, test_size=0.25) # random_state=0 
+
+        # fit the model using the cross-validation data
+        #   typically cross-validation is used to get a sense of how well it works
+        #   and tune any parameters, such as the k in kNN (3? 5? 7? 41?, etc.)
+        knn.fit(cv_data_train, cv_target_train)
+        score += knn.score(cv_data_test,cv_target_test)
+        print("score is ", score)
+    average_score = score/10
+
+    print("KNN cv training-data score:", knn.score(cv_data_train,cv_target_train))
+    print("KNN cv testing-data score:", knn.score(cv_data_test,cv_target_test))
+    print("the average score is ", average_score)
+
+    if average_score > best_score:
+        best_score = average_score
+        index = i
+
+print("the best number of neighbors is ", index)    
+print("the best score is ", best_score)
+
+
+knn = KNeighborsRegressor(n_neighbors=index)
+cv_data_train, cv_data_test, cv_target_train, cv_target_test = \
+cross_validation.train_test_split(X_train, y_train, test_size=0.25) # random_state=0 
+knn.fit(cv_data_train, cv_target_train)
+
+#
+# now, train the model with ALL of the training data...  and predict the labels of the test set
+#
+
+# this next line is where the full training data is used for the model
+knn.fit(X_train, y_train) 
+print("\nCreated and trained a knn classifier")  #, knn
+
+# here are some examples, printed out:
+print("digit_X_test's predicted outputs are")
+print(knn.predict(X_test))
+
+# and here are the actual labels (iris types)
+print("and the actual labels are")
+print(y_test)
+
+
+
+for i in range(len(df.index)):
+    if df["Hue"].iloc[i] == -1:
+        df["Hue"].iloc[i] = knn.predict(X_test[i])[0]
+
+print(df)
+
+
+
+
+"""
+Here are our results from our analysis of best neighbors:
+
+the best number of neighbors is  6
+the best score is  0.242464594835
+
+Created and trained a knn classifier
+digit_X_test's predicted outputs are
+[ 1.01166667  1.09166667  0.61666667  1.075       0.65166667  1.195       0.835
+  1.04        1.05        0.895       1.12833333  1.01833333  1.09        1.025
+  1.09833333  0.94666667  1.16333333  1.13166667  1.01666667  0.81
+  1.02166667  1.22333333  1.17333333  0.975       0.75        0.595       0.795
+  1.05666667  1.08833333  1.09666667]
+and the actual labels are
+[ 1.09  1.09  0.57  0.75  0.61  1.19  1.13  1.11  0.96  0.57  1.02  0.9
+  0.82  1.05  1.09  0.91  1.25  1.12  1.04  0.81  0.7   1.15  1.22  0.96
+  0.89  0.72  0.77  1.16  1.23  1.19]
+
+     Color Intensity       Hue  OD280/OD315 of diluted wines  Proline
+0               5.75  1.011667                          3.17     1510
+1               7.30  1.091667                          2.88     1310
+2               4.50  0.616667                          3.52      770
+3               4.80  1.075000                          3.22     1195
+4               3.95  0.651667                          2.77     1285
+5               3.70  1.195000                          2.69     1020
+6               4.90  0.835000                          3.44     1065
+7               8.90  1.040000                          3.10     1260
+8               7.05  1.050000                          3.26     1190
+9               5.75  0.895000                          1.59      450
+10              3.05  1.128333                          1.82      870
+11              3.35  1.018333                          3.50      985
+12              2.65  1.090000                          2.52      500
+13              2.57  1.025000                          3.13      463
+14              2.60  1.098333                          3.21      562
+15              2.15  0.946667                          3.30      290
+16              2.45  1.163333                          2.77      562
+17              2.70  1.131667                          3.02      312
+18              2.90  1.016667                          2.81      562
+19              3.94  0.810000                          2.84      352
+20              2.12  1.021667                          2.78      342
+21              5.40  1.223333                          1.42      530
+22              5.00  1.173333                          1.29      600
+23              7.65  0.975000                          1.86      625
+24             10.80  0.750000                          1.47      480
+25              7.60  0.595000                          1.55      640
+26              7.90  0.795000                          1.48      725
+27             10.68  1.056667                          1.56      695
+28              8.50  1.088333                          1.92      630
+29              7.30  1.096667                          1.56      750
+
+"""
+
 
 
