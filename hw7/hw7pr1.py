@@ -5,6 +5,8 @@
 
 # Check that you have opencv:
 import cv2
+import numpy as np
+from matplotlib import pyplot as plt
 
 # if this doesn't work, try
 """
@@ -292,10 +294,10 @@ from matplotlib import pyplot as plt
 #
 # try_filter!
 #
-def try_filter( image ):
+def try_filter( image):
     """ try out a filter! """
     from matplotlib import pyplot as plt
-    new_image = example_filter( image )
+    new_image = new_filter( image)
     plt.imshow(new_image)
     plt.show() 
 
@@ -327,6 +329,7 @@ def example_filter_gbr( image ):
     """ an example of a pixel-by-pixel filter 
         input: an r, g, b image
         output: a transformed r, g, b image
+        *makes it purple and green colors* 
     """
     new_image = image.copy()
     num_rows, num_cols, num_chans = new_image.shape
@@ -341,6 +344,7 @@ def example_filter_inv( image ):
     """ an example of a pixel-by-pixel filter 
         input: an r, g, b image
         output: a transformed r, g, b image
+        *lighter colors, light blue, pinks*
     """
     new_image = image.copy()
     num_rows, num_cols, num_chans = new_image.shape
@@ -354,6 +358,7 @@ def example_filter_ig( image ):
     """ an example of a pixel-by-pixel filter 
         input: an r, g, b image
         output: a transformed r, g, b image
+        *bright popping neon colors*
     """
     new_image = image.copy()
     num_rows, num_cols, num_chans = new_image.shape
@@ -367,6 +372,7 @@ def example_filter_delbot2( image ):
     """ an example of a pixel-by-pixel filter 
         input: an r, g, b image
         output: a transformed r, g, b image
+        *orange and blue* 
     """
     new_image = image.copy()
     num_rows, num_cols, num_chans = new_image.shape
@@ -380,6 +386,7 @@ def example_filter_deltop2( image ):
     """ an example of a pixel-by-pixel filter 
         input: an r, g, b image
         output: a transformed r, g, b image
+        *orange and blues with gray mask over full thing*
     """
     new_image = image.copy()
     num_rows, num_cols, num_chans = new_image.shape
@@ -402,16 +409,29 @@ def example_filter_deltop2( image ):
 
     # In[ ]:
 
-    def new_filter( image ):
-        """ better docstring needed! Explain your filter... """
-        pass
+def new_filter( image ):
+    """ plots the edges of from the image """
+    new_image = image.copy()
+    edges = cv2.Canny(new_image, 100, 200)
+    num_rows, num_cols, num_chans = new_image.shape
+    plt.subplot(121), plt.imshow(new_image, cmap="gray")
+    plt.title('Original'), plt.xticks([]), plt.yticks([])
+    plt.subplot(122), plt.imshow(edges, cmap="rainbow")
+    plt.title("Edges"), plt.xticks([]), plt.yticks([])
+    plt.show()
+    return new_image
+
 
 
     # In[ ]:
 
-    def two_image_filter( image1, image2 ):
-        """ better docstring needed! Explain your two-image filter... """
-        pass
+def two_image_filter( image1, image2 ):
+    """ better docstring needed! Explain your two-image filter... """
+    new_image1 = image1.copy()
+    new_image2 = image2.copy()
+    #new_image = cv2.add(new_image1,new_image2)
+    new_image1 = cv2.flip(new_image1, 1)
+    return new_image1
 
 
 
