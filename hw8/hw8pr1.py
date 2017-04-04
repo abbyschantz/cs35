@@ -16,6 +16,8 @@ IMAGE_NAME = "./batman.png"
 IMAGE_NAME = "./hmc.png"
 IMAGE_NAME = "./thematrix.png"
 IMAGE_NAME = "./fox.jpg"
+IMAGE_NAME = "./alien.jpg"
+IMAGE_NAME = "./starbucks.png"
 image = cv2.imread(IMAGE_NAME, cv2.IMREAD_COLOR)
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -24,7 +26,7 @@ image_pixels = image.reshape((image.shape[0] * image.shape[1], 3))
 
 # choose k (the number of means) in  NUM_MEANS
 # and cluster the pixel intensities
-NUM_MEANS = 3
+NUM_MEANS = 2
 clusters = KMeans(n_clusters = NUM_MEANS)
 clusters.fit(image_pixels)
 
