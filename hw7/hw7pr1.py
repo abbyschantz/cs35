@@ -294,10 +294,10 @@ from matplotlib import pyplot as plt
 #
 # try_filter!
 #
-def try_filter( image):
+def try_filter( image1, image2):
     """ try out a filter! """
     from matplotlib import pyplot as plt
-    new_image = new_filter( image)
+    new_image = two_image_filter( image1, image2)
     plt.imshow(new_image)
     plt.show() 
 
