@@ -3,6 +3,8 @@
 # # Introduction to OpenCV - solutions for hw7 (cs35 spring 17)
 # hw7_sols.py
 
+#GITHUB: https://github.com/abbyschantz/cs35/tree/master/hw7
+
 # Check that you have opencv:
 import cv2
 import numpy as np

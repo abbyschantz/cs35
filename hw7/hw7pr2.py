@@ -18,6 +18,8 @@
 # Happy steganographizing, everyone!
 #
 
+# GITHUB: https://github.com/abbyschantz/cs35/tree/master/hw7
+
 import numpy as np
 from matplotlib import pyplot as plt
 import cv2

@@ -24,6 +24,8 @@
 # Happy green-screening, everyone! Include at least TWO examples of a background!
 #
 
+#GITHUB: https://github.com/abbyschantz/cs35/tree/master/hw7
+
 import cv2
 
 import numpy as np
