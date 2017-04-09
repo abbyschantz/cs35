@@ -99,7 +99,8 @@ plt.show(fig)
 # comments and reflections on hw8pr1, k-means and pixels
 """
  + Which of the paths did you take:  
-	+ posterizing or 
+	+ posterizing 
+		COMPLETED
 	+ algorithm-implementation
 
  + How did it go?  Which file(s) should we look at?
