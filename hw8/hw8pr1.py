@@ -3,6 +3,7 @@
 #
 # hw8pr1.py - the k-means algorithm -- with pixels...
 #
+# Names: Abby Schantz, Eliana Keinan, Liz Harder
 
 # import everything we need...
 import matplotlib.pyplot as plt
@@ -10,6 +11,8 @@ from sklearn.cluster import KMeans
 import utils
 import cv2
 import math
+import numpy as np
+import os
 
 # choose an image...
 IMAGE_NAME = "./jp.png"  # Jurassic Park
@@ -93,16 +96,14 @@ plt.imshow(new_image)
 plt.show(fig)
 
 	
-
-
 #
 # comments and reflections on hw8pr1, k-means and pixels
 """
  + Which of the paths did you take:  
 	+ posterizing 
-		COMPLETED
+		COMPLETED (see above)
 	+ algorithm-implementation
-
+		COMPLETED (see below)
  + How did it go?  Which file(s) should we look at?
  	It went well. We simply looped through the pixels and reassigned them to 
  	that in the list of choices of colors with the smallest difference
@@ -117,3 +118,83 @@ plt.show(fig)
 """
 #
 #
+
+# Extra Credit: Part B, Choice 2: the algs paths
+# 
+""" Notes from HW instructions: 
+1. first, initialize k centers at random
+2. next, determine which center each data point belongs to (is closest to)
+3. then, re-compute the locations of the centers as the means (averages) of those data points belonging to it
+4. continue until convergence
+"""
+
+def initialize_center(data, k):
+	"""This function randomly chooses k number of points from this list to be our initial centers"""
+	centers = random.sample(data,k)
+	return centers
+
+def cluster_points(data, centers):
+	""" this function input the data and the centers randomly generated from 
+	initialize_center and outputs a dictionary of keys (made up of the centers) 
+	and the following list of points that are closest to that center """
+	clusters = {}
+	for i in data:
+		closestCenter = -1
+		dist_closestCenter = float('inf')
+		for x in centers:
+			dist = math.sqrt( (i[0] - x[0])**2 + (i[1] - x[1])**2 )
+			if dist < dist_closestCenter:
+				closestCenter = x
+				dist_closestCenter = dist
+		if closestCenter in clusters:
+			clusters[closestCenter].append(i)
+		else:
+			clusters[closestCenter] = [i]
+	return clusters
+
+def recenter(clusters):
+	""" recenter takes in the clusters from the cluster_points 
+	function and returns new centers that are calculated by taking 
+	the means of the lists from the prior dictionary and forming a 
+	new center point"""
+	newcenters = []
+	keys = sorted(clusters.keys())
+	for k in keys:
+		sumx, sumy = 0, 0
+		for p in clusters[k]:
+			sumx += p[0]
+			sumy += p[1]
+		avgx = sumx/len(clusters[k])
+		avgy = sumy/len(clusters[k])
+		newcenters += [(avgx, avgy)]
+	return newcenters
+
+def convergence(oldcenters, centers):
+	"""this function tests to see if the centers have changed 
+	by seeing if the centers are equal to the old centers"""
+	return set(oldcenters) == set(centers)
+
+def kmeans(data,k):
+	"""This is the main function that runs the kmeans algoritm. 
+	It continues to interate through the helper functions until 
+	convergence has been reached. This fucntion outputs a dictionary 
+	made up of a the new centers and the points that make up that center's cluster"""
+	oldcenters = []
+	centers = initialize_center(data,k)
+	clusters = {}
+	while (convergence(centers, oldcenters) == False):
+		oldcenters = centers
+		clusters = cluster_points(data,oldcenters)
+		#print(clusters)
+		centers = recenter(clusters)
+	return (clusters)
+
+""" Reflection: 
+For extra credit we chose to implement the kmeans function 
+through an algorithm. It was helpful to create the helper 
+functions for each step of the math formula (given to us in 
+the homework instructions) as it really clarified what kmeans did. 
+If I were to choose a method after doing both I would use the first 
+since there is less room for error, however it was helpful to do the 
+two paths for the same homework problem. 
+"""
