@@ -5,6 +5,8 @@
 #
 # Names: Abby Schantz, Eliana Keinan, Liz Harder
 
+#GITHUB: https://github.com/abbyschantz/cs35/tree/master/hw8
+
 # import everything we need...
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
