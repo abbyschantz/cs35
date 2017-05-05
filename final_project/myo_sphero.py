@@ -81,84 +81,6 @@ class Listener(libmyo.DeviceListener):
             print("current coords", coords)
             return   # Stops the Hub
 
-            #another idea is to only use forward roll and use device rotation to turn??
-            #also try roll, pitch, yaw for myo to get another variables -- go when arm raised? 
-            #s.roll(self, spped, heading, state, response)
-                # :param speed: 0-255 value representing 0-max speed of the sphero.
-                # :param heading: heading in degrees from 0 to 359.
-            #s.set_heading(heading, response): :param heading: heading in degrees from 0 to 359 (motion will be shortest angular distance to heading command)
-            #s.set_rgb_led(self, red, green, blue, save, response):
-            # :param red: red color value.
-            # :param green: green color value.
-            # :param blue: blue color value.
-
-# def draw(coordinate):
-#     """
-#         to demo:  click to bring focus to the messi image
-#         move mouse around and hit 'r' (lowercase r)
-#         a cyan rectangle should appear at your mouse
-#         hit spacebar to clear
-
-#         drawing reference:
-#           http://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html
-#     """
-#     # Create a black image, a window and bind the function to window
-#     # this is from here:
-
-#     # def mouse_handler(event,x,y,flags,param):
-#     #     """ a function that gets called on mouse events 
-#     #         reference: 
-#     #     """
-#     #     current_mouse_pos[0] = x
-#     #     current_mouse_pos[1] = y
-#     #     #print("The mouse is currently at", current_mouse_pos)
-#     #     if event == cv2.EVENT_LBUTTONDOWN: print("Left button clicked!")
-#     #     if event == cv2.EVENT_RBUTTONDOWN: print("Right button clicked!")
-
-#     # cv2.namedWindow('image')
-#     # cv2.setMouseCallback('image',mouse_handler)
-
-#     while True:
-#         x, y = coordinate  # adjusted by the mouse_handler!
-#         # while True:
-#         cv2.imshow('image',image)
-
-#         x_change = 0
-#         y_change = 0
-#         """ key-press handling """
-#         k = cv2.waitKey(20) & 0xFF
-#         k_char = chr(k)
-#         if k_char == 'f':
-#             x_change = -10
-#         if k_char == 't':
-#             y_change = -10
-#         if k_char == 'h':
-#             x_change = 10
-#         if k_char == 'g':
-#             y_change = 10
-        
-#         DELTA = 1
-#         UL = (x-DELTA,y-DELTA)  # Upper Left
-#         LR = (x+DELTA,y+DELTA)  # Lower Right
-#         CLR = (255,255,255)  # color
-#         WIDTH = 5  # rectangle width]
-#         THICK = 10
-#         CENTER = (x,y)
-#         cv2.circle(image, CENTER, WIDTH, CLR, THICK) # draw a circle
-#         if k_char == ' ': image = image_orig.copy() # clear by re-copying!
-#         # if k == 27: # escape key has value 27 (no string represetation...)
-#         #     print("Quitting!")
-#         #     break
-#         # """ end of key-press handling """
-
-#         x += x_change
-#         y += y_change
-
-
-
-
-#         # outside of the while True loop...
-#     cv2.destroyAllWindows()
 
 import cv2
 
@@ -182,8 +104,8 @@ def main():
 
     try:
         while hub.running:
-
-            #START OF CV2 PIXEL PROCESSING 
+            ###############################GAME ONE#########################################################
+            #START OF CV2 PIXEL PROCESSING FOR DRAW 
             x, y = coords  
         # while True:
             cv2.imshow('image',image)
@@ -212,7 +134,51 @@ def main():
             # x += x_change
             # y += y_change
             #END PIXEL PROCESSING 
+            ###############################END ! GAME ONE ! END#########################################################
 
+            ###############################GAME TWO#########################################################
+            # count = 1
+            # x, y = coords  # adjusted by the mouse_handler!
+
+            # cv2.imshow('image',image)
+
+            # x_change = 0
+            # y_change = 0
+            # """ key-press handling """
+            # k = cv2.waitKey(20) & 0xFF
+            # k_char = chr(k)
+            # if k_char == 'f':
+            #     y_change = -20
+            #     print('f was clicked. move left')
+            # if k_char == 't':
+            #     x_change = -20
+            #     print('t was clicked. move up')
+            # if k_char == 'h':
+            #     y_change = 20
+            #     print('h was clicked. move right')
+            # if k_char == 'g':
+            #     x_change = 20
+            #     print('g was clicked. move down')
+
+            
+            # for row in range(20):
+            #     for col in range(20):
+            #         r, g, b = image[x+row,y+col]
+            #         if r == g == b == 255:
+            #             image[x+row,y+col] = original[x+row,y+col]
+            #         # else:
+            #         #     image[x+row,y+col] = [255,255,255]
+
+
+            # if k_char == ' ': image = image_orig.copy() # clear by re-copying!
+            # # if k == 27: # escape key has value 27 (no string represetation...)
+            # #     print("Quitting!")
+            # #     break
+            # # """ end of key-press handling """
+
+            # x += x_change
+            # y += y_change
+            ###############################END ! GAME TWO ! END#########################################################
 
 
             sleep(0.25)
